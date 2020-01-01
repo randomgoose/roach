@@ -14,7 +14,7 @@ class File extends Component {
             <div className="file">
                 <a href="#" onClick={this.clickHandler}>
                     <div className="fileTitle">{this.props.title}</div>
-                    <div className="fileContent">{this.props.content}</div>
+                    <div className="fileExcerpt">{this.props.content}</div>
                 </a>
             </div>
         )

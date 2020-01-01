@@ -25,7 +25,8 @@ class Library extends Component {
 
     render() {
         let files = this.state.fileList.map((file) => 
-            <li key={this.state.fileList.indexOf(file)} className={ this.state.selectedIndex === this.state.fileList.indexOf(file) ? "selected" : "unselected"}>
+            <li key={this.state.fileList.indexOf(file)}
+                className={ this.state.selectedIndex === this.state.fileList.indexOf(file) ? "selected" : "unselected"}>
                 <File title={file.title} content={file.content} index={this.state.fileList.indexOf(file)} selectFile={this.selectFile}/>
             </li>)
 
