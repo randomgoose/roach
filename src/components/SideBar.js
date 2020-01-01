@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile } from '@fortawesome/free-solid-svg-icons';
+import Library from './Library';
 
 class SideBar extends Component {
 	constructor(props) {
@@ -26,11 +25,19 @@ class SideBar extends Component {
 		let contentList = [
 			{"title": "Shopping List", "content": "yes!"},
 			{"title": "Data Analysis", "content": "no!"},
+			{"title": "Daily Report", "content": "okay.."},
+			{"title": "Shopping List", "content": "yes!"},
+			{"title": "Data Analysis", "content": "no!"},
+			{"title": "Daily Report", "content": "okay.."},
+			{"title": "Shopping List", "content": "yes!"},
+			{"title": "Data Analysis", "content": "no!"},
+			{"title": "Daily Report", "content": "okay.."},
+			{"title": "Shopping List", "content": "yes!"},
+			{"title": "Data Analysis", "content": "no!"},
 			{"title": "Daily Report", "content": "okay.."}
-			
 		]
 		let documents = contentList.map((e) => <li key={contentList.indexOf(e)}>
-			<a href='www.baidu.com'>
+			<a href='#'>
 				{/* <FontAwesomeIcon icon={faFile} /> */}
 				<div className='documentTitle'>{e.title}</div>
 				<div className='documentExcerpt'>{e.content}</div>
@@ -40,12 +47,13 @@ class SideBar extends Component {
 		return(
 			<div id='sideBar' className={this.state.collapsed ? 'sideBar hidden' : 'sideBar shown'}>
 				SideBar!
-				<div id={'userStatus'} />
+				{/* <div id={'userStatus'} />
 				<div id='documentContainer'>
 					<ul>
 						{documents}
 					</ul>
-				</div>
+				</div> */}
+				<Library updateText={this.props.updateText} />
 			</div>
 		)
 	}

@@ -1,10 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
-import Editor,  { defaultText } from './comopnents/Editor';
-import ToolBar from './comopnents/ToolBar';
-import SideBar from './comopnents/SideBar';
-import WordCounter from './comopnents/WordCounter';
-import Preview from './comopnents/Preview';
+import Editor,  { defaultText } from './components/Editor';
+import ToolBar from './components/ToolBar';
+import SideBar from './components/SideBar';
+import WordCounter from './components/WordCounter';
+import Preview from './components/Preview';
 import { jsPDF } from 'jspdf';
 import './App.css';
 import './style.css'
@@ -16,7 +16,8 @@ class App extends React.Component {
 			textToRender: defaultText,
 			wordsNum: defaultText.match(/\b[-?(\w+)?]+\b/gi).length,
 			linesNum: defaultText.split('\n').length,
-			sideBarCollapsed: true
+			sideBarCollapsed: true,
+			loggedIn: false
 		}
   }
   
@@ -56,7 +57,7 @@ class App extends React.Component {
                  updateText = {this.updateText}
                  toggleSideBar = {this.toggleSideBar}
                  collapsed = {this.state.sideBarCollapsed} />
-				<SideBar collapsed = {this.state.sideBarCollapsed} />
+				<SideBar collapsed = {this.state.sideBarCollapsed} updateText = {this.updateText}/>
 				<Editor updateText = {this.updateText} />
 				<Preview textToRender = {this.state.textToRender} />
 				<WordCounter wordsNum = {this.state.wordsNum} linesNum = {this.state.linesNum} />

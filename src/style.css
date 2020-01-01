@@ -170,3 +170,7 @@ body {
 }
 
 /* Markdown CSS */
+
+.selected {
+    background-color: red;
+}
