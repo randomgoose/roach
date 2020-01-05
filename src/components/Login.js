@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { LoginContext } from './LoginContext';
 const axios = require('axios');
+axios.defaults.withCredentials = true;
 
 class Login extends Component {
     static contextType = LoginContext;
@@ -15,7 +16,7 @@ class Login extends Component {
         axios.post('http://localhost:5000/login', {
             username: document.getElementById("username").value,
             password: document.getElementById("password").value
-        })
+        }, { withCredentials: true })
         .then((response) => {
             console.log(response);
             

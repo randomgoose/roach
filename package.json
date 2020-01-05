@@ -36,5 +36,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "guppy": {
+    "id": "e32171d0-2fd9-11ea-b5f0-11a1922e2b6a",
+    "name": "roach",
+    "type": "create-react-app",
+    "color": "#c41d00",
+    "icon": null,
+    "createdAt": 1578242345326
   }
 }
