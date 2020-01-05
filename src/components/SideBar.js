@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Library from './Library';
+import Login from './Login';
+
 
 class SideBar extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -20,6 +23,7 @@ class SideBar extends Component {
 	// 	})
 	//   }
 
+	
 	render(){
 		console.log(this.state.collapsed);
 		let contentList = [
@@ -46,14 +50,7 @@ class SideBar extends Component {
 
 		return(
 			<div id='sideBar' className={this.state.collapsed ? 'sideBar hidden' : 'sideBar shown'}>
-				SideBar!
-				{/* <div id={'userStatus'} />
-				<div id='documentContainer'>
-					<ul>
-						{documents}
-					</ul>
-				</div> */}
-				<Library updateText={this.props.updateText} />
+				{this.props.isLoggedIn ? <Library updateText={this.props.updateText} /> : <Login />}
 			</div>
 		)
 	}

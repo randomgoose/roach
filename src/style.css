@@ -55,6 +55,7 @@ body {
     background-color: #333333;
     transition: 0.5s;
     color: white;
+    overflow: scroll;
 }
 
 .shown {
@@ -112,32 +113,8 @@ body {
     color: #999999;
 }
 
-#documentContainer {
-    /* background-color: red; */
-}
-
-#documentContainer a {
-    height: 100%;
-    text-decoration: none;
-    /* background-color: thistle; */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
 #documentContainer ul {
     padding-inline-start: 0;
-}
-
-#documentContainer li {
-    width: 100%;
-    height: 70px;
-    border-color: teal;
-    background-color: #333333;
-    list-style: none;
-    /* padding: 20px; */
-    margin: 10px auto;
-    border-left: 3px solid red;
 }
 
 #documentContainer li:hover {
@@ -173,9 +150,20 @@ body {
 
 /* File List */
 #library li {
-    /* border: ; */
+    width: 100%;
+    height: 70px;
+    background-color: #333333;
     list-style: none;
+    /* padding: 20px; */
     margin: 10px auto;
+}
+
+#library li:hover {
+    background-color: #444444;
+}
+
+#library >  .file {
+    display: flex;
 }
 
 #library ul {
@@ -183,19 +171,25 @@ body {
 }
 
 #library a {
+    height: 100%;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .fileTitle {
     color: white;
     font-weight: bold;
+    margin-left: 20px;
 }
 
 .fileExcerpt {
     color: white;
+    margin-left: 20px;
 }
 
 .selected {
     background-color: #3a3a3a;
-    border-left: 3px solid red;
+    border-left: 3px solid #3498db;
 }

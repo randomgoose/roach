@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
 import Editor,  { defaultText } from './components/Editor';
 import ToolBar from './components/ToolBar';
 import SideBar from './components/SideBar';
 import WordCounter from './components/WordCounter';
 import Preview from './components/Preview';
 import { jsPDF } from 'jspdf';
+import { LoginContext } from './components/LoginContext';
 import './App.css';
 import './style.css'
+
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.toggleLogin = () => {
+			this.setState({
+				isLoggedIn: this.state.isLoggedIn === false ? true : false
+			})
+		}
+
+
 		this.state = {
 			textToRender: defaultText,
 			wordsNum: defaultText.match(/\b[-?(\w+)?]+\b/gi).length,
 			linesNum: defaultText.split('\n').length,
 			sideBarCollapsed: true,
-			loggedIn: false
+			isLoggedIn: false
 		}
   }
-  
+
   changeTheme = (event) => {
     let currentThemeLink = document.getElementById("theme");
 	  currentThemeLink.setAttribute('href', './themes/' + event.target.value.toLowerCase() + '.css');
@@ -57,7 +66,9 @@ class App extends React.Component {
                  updateText = {this.updateText}
                  toggleSideBar = {this.toggleSideBar}
                  collapsed = {this.state.sideBarCollapsed} />
-				<SideBar collapsed = {this.state.sideBarCollapsed} updateText = {this.updateText}/>
+				<LoginContext.Provider value={{isLoggedIn: false, toggleLogin: this.toggleLogin}}>
+					<SideBar isLoggedIn = {this.state.isLoggedIn} collapsed = {this.state.sideBarCollapsed} updateText = {this.updateText}/>
+				</LoginContext.Provider>
 				<Editor updateText = {this.updateText} />
 				<Preview textToRender = {this.state.textToRender} />
 				<WordCounter wordsNum = {this.state.wordsNum} linesNum = {this.state.linesNum} />

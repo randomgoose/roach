@@ -8,6 +8,18 @@ class Library extends Component {
         this.state = {
             selectedIndex: 0,
             fileList: [
+                {"title": "Shopping List", "content": "## yes!", "wordsNum": 12, "linesNum": 12, "text": "## A"},
+                {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
+                {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"},
+                {"title": "Shopping List", "content": "yes!", "wordsNum": 12, "linesNum": 12, "text": "A"},
+                {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
+                {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"},
+                {"title": "Shopping List", "content": "yes!", "wordsNum": 12, "linesNum": 12, "text": "A"},
+                {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
+                {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"},
+                {"title": "Shopping List", "content": "yes!", "wordsNum": 12, "linesNum": 12, "text": "A"},
+                {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
+                {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"},
                 {"title": "Shopping List", "content": "yes!", "wordsNum": 12, "linesNum": 12, "text": "A"},
                 {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
                 {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"}
@@ -20,7 +32,7 @@ class Library extends Component {
             selectedIndex: index
         });
         this.props.updateText(this.state.fileList[index]);
-        document.getElementById('editor').value = this.state.fileList[index].content;
+        document.getElementById('editor').value = this.state.fileList[index].text;
     }
 
     render() {
@@ -36,7 +48,6 @@ class Library extends Component {
                 <ul>
                 {files}
                 </ul>
-               
             </div>
         )
     }
