@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Library from './Library';
 import Login from './Login';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 class SideBar extends Component {
@@ -8,7 +10,14 @@ class SideBar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			collapsed: this.props.collapsed
+			collapsed: this.props.collapsed,
+			fileList: []
+		}
+
+		this.updateFileList = (fileList) => {
+			this.setState({
+				fileList
+			})
 		}
 	}
 	
@@ -17,40 +26,20 @@ class SideBar extends Component {
 			collapsed: props.collapsed
 		}
 	}
+
+	
 	// componentWillReceiveProps({collapsed}) {
 	// 	this.setState({
 	// 		collapsed: this.props.collapsed
 	// 	})
 	//   }
-
+	
 	
 	render(){
-		console.log(this.state.collapsed);
-		let contentList = [
-			{"title": "Shopping List", "content": "yes!"},
-			{"title": "Data Analysis", "content": "no!"},
-			{"title": "Daily Report", "content": "okay.."},
-			{"title": "Shopping List", "content": "yes!"},
-			{"title": "Data Analysis", "content": "no!"},
-			{"title": "Daily Report", "content": "okay.."},
-			{"title": "Shopping List", "content": "yes!"},
-			{"title": "Data Analysis", "content": "no!"},
-			{"title": "Daily Report", "content": "okay.."},
-			{"title": "Shopping List", "content": "yes!"},
-			{"title": "Data Analysis", "content": "no!"},
-			{"title": "Daily Report", "content": "okay.."}
-		]
-		let documents = contentList.map((e) => <li key={contentList.indexOf(e)}>
-			<a href='#'>
-				{/* <FontAwesomeIcon icon={faFile} /> */}
-				<div className='documentTitle'>{e.title}</div>
-				<div className='documentExcerpt'>{e.content}</div>
-			</a>
-			</li>)
-
 		return(
 			<div id='sideBar' className={this.state.collapsed ? 'sideBar hidden' : 'sideBar shown'}>
-				{this.props.isLoggedIn ? <Library updateText={this.props.updateText} /> : <Login />}
+				<div><button className='btn' id='undo'><FontAwesomeIcon icon={faSignOutAlt} /></button></div>
+				{this.props.isLoggedIn ? <Library updateText={this.props.updateText} fileList={this.state.fileList} /> : <Login updateFileList={this.updateFileList}/>}
 			</div>
 		)
 	}

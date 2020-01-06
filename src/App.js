@@ -12,14 +12,7 @@ import './style.css'
 
 class App extends React.Component {
 	constructor(props) {
-		super(props);
-
-		this.toggleLogin = () => {
-			this.setState({
-				isLoggedIn: this.state.isLoggedIn === false ? true : false
-			})
-		}
-
+		super(props); 
 
 		this.state = {
 			textToRender: defaultText,
@@ -29,6 +22,12 @@ class App extends React.Component {
 			isLoggedIn: false
 		}
   }
+  
+  toggleLogin = () => {
+	this.setState({
+		isLoggedIn: this.state.isLoggedIn === false ? true : false
+	})
+}
 
   changeTheme = (event) => {
     let currentThemeLink = document.getElementById("theme");
@@ -61,11 +60,11 @@ class App extends React.Component {
 	render(){
 		return(
 			<div id='container'>
-        <ToolBar changeTheme = {this.changeTheme} 
-                 exportPDF = {this.exportPDF}
-                 updateText = {this.updateText}
-                 toggleSideBar = {this.toggleSideBar}
-                 collapsed = {this.state.sideBarCollapsed} />
+        		<ToolBar changeTheme = {this.changeTheme} 
+						 exportPDF = {this.exportPDF}
+						 updateText = {this.updateText}
+						 toggleSideBar = {this.toggleSideBar}
+						 collapsed = {this.state.sideBarCollapsed} />
 				<LoginContext.Provider value={{isLoggedIn: false, toggleLogin: this.toggleLogin}}>
 					<SideBar isLoggedIn = {this.state.isLoggedIn} collapsed = {this.state.sideBarCollapsed} updateText = {this.updateText}/>
 				</LoginContext.Provider>

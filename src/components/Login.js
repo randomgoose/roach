@@ -7,7 +7,6 @@ class Login extends Component {
     static contextType = LoginContext;
     constructor(props){
         super(props);
-
         this.login = this.login.bind(this);
     }
 
@@ -18,8 +17,16 @@ class Login extends Component {
             password: document.getElementById("password").value
         }, { withCredentials: true })
         .then((response) => {
-            console.log(response);
-            
+            if(response){
+                console.log(response.data);
+                this.props.updateFileList(response.data.documents);
+                this.context.toggleLogin();
+
+                console.log(response.data.documents);
+            }
+            else{
+                console.log('not authenticated');
+            }
         })
         .catch((err) => {
             console.log(err);

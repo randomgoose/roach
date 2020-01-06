@@ -7,23 +7,7 @@ class Library extends Component {
 
         this.state = {
             selectedIndex: 0,
-            fileList: [
-                {"title": "Shopping List", "content": "## yes!", "wordsNum": 12, "linesNum": 12, "text": "## A"},
-                {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
-                {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"},
-                {"title": "Shopping List", "content": "yes!", "wordsNum": 12, "linesNum": 12, "text": "A"},
-                {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
-                {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"},
-                {"title": "Shopping List", "content": "yes!", "wordsNum": 12, "linesNum": 12, "text": "A"},
-                {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
-                {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"},
-                {"title": "Shopping List", "content": "yes!", "wordsNum": 12, "linesNum": 12, "text": "A"},
-                {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
-                {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"},
-                {"title": "Shopping List", "content": "yes!", "wordsNum": 12, "linesNum": 12, "text": "A"},
-                {"title": "Data Analysis", "content": "no!", "wordsNum": 12, "linesNum": 12, "text": "B"},
-                {"title": "Daily Report", "content": "okay..", "wordsNum": 12, "linesNum": 12, "text": "C"}
-            ]
+            fileList: this.props.fileList
         }
     }
 
@@ -31,15 +15,15 @@ class Library extends Component {
         this.setState({
             selectedIndex: index
         });
-        this.props.updateText(this.state.fileList[index]);
-        document.getElementById('editor').value = this.state.fileList[index].text;
+        // this.props.updateText(this.state.fileList[index]);
+        // document.getElementById('editor').value = this.state.fileList[index].text;
     }
 
     render() {
         let files = this.state.fileList.map((file) => 
             <li key={this.state.fileList.indexOf(file)}
-                className={ this.state.selectedIndex === this.state.fileList.indexOf(file) ? "selected" : "unselected"}>
-                <File title={file.title} content={file.content} index={this.state.fileList.indexOf(file)} selectFile={this.selectFile}/>
+                className={ this.state.selectedIndex === this.state.fileList.indexOf(JSON.parse(file)) ? "selected" : "unselected"}>
+                <File title={JSON.parse(file).title} content={JSON.parse(file).content} index={this.state.fileList.indexOf(file)} selectFile={this.selectFile}/>
             </li>)
 
         return(
