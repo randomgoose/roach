@@ -71,6 +71,7 @@ class App extends React.Component {
 				<Editor updateText = {this.updateText} />
 				<Preview textToRender = {this.state.textToRender} />
 				<WordCounter wordsNum = {this.state.wordsNum} linesNum = {this.state.linesNum} />
+				<div style={{"background": "red", "color": "blue", "width": "300px"}}>{String(this.state.isLoggedIn)}</div>
 			</div>
 		)
 	}

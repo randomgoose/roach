@@ -18,11 +18,10 @@ class Login extends Component {
         }, { withCredentials: true })
         .then((response) => {
             if(response){
-                console.log(response.data);
+                console.log(response);
                 this.props.updateFileList(response.data.documents);
                 this.context.toggleLogin();
-
-                console.log(response.data.documents);
+                // console.log(response.data.documents);
             }
             else{
                 console.log('not authenticated');
