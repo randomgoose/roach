@@ -5,9 +5,28 @@ axios.defaults.withCredentials = true;
 
 class Login extends Component {
     static contextType = LoginContext;
+    
     constructor(props){
         super(props);
         this.login = this.login.bind(this);
+    }
+
+    componentDidMount(){
+        // const user = localStorage.getItem('loggedUser');
+        axios.post('http://localhost:5000/authrequired', {
+            id: localStorage.getItem('loggedUser')
+        }, { withCredentials: true})
+        .then((response) => {
+            if (response.data.isLoggedIn === true) {
+                this.props.updateFileList(response.data.documents);
+                this.context.toggleLogin();
+            }
+            alert(localStorage.getItem('loggedUser'));
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        
     }
 
     login = (event) => {
@@ -20,6 +39,7 @@ class Login extends Component {
             if(response){
                 console.log(response);
                 this.props.updateFileList(response.data.documents);
+                localStorage.setItem('loggedUser', response.data.id);
                 this.context.toggleLogin();
                 // console.log(response.data.documents);
             }

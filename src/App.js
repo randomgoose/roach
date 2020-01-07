@@ -19,7 +19,8 @@ class App extends React.Component {
 			wordsNum: defaultText.match(/\b[-?(\w+)?]+\b/gi).length,
 			linesNum: defaultText.split('\n').length,
 			sideBarCollapsed: true,
-			isLoggedIn: false
+			isLoggedIn: false,
+			loggedUser: ''
 		}
   }
   
