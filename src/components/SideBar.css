@@ -1,0 +1,40 @@
+.sideBar {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    width: 300px;
+    background-color: #333333;
+    transition: 0.5s;
+    color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.shown {
+    width: 300px;
+    
+}
+
+.hidden {
+    width: 0;
+}
+
+/* #sideBar::-webkit-scrollbar {
+    border-radius: 10px;
+
+	background-color: #555;
+  } */
+
+  #sideBar::-webkit-scrollbar-track {
+    background-color: #444;
+  }
+  
+  #sideBar::-webkit-scrollbar {
+    width: 12px;
+    background-color: #ccc;
+  }
+  
+  #sideBar::-webkit-scrollbar-thumb {
+    width: 10px;
+    border-radius: 10px;
+    background-color: #555;
+  }

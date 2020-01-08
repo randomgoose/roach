@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Editor.css';
 
 const defaultText = `# Welcome to my React Markdown Previewer!
 
@@ -104,7 +105,7 @@ class Editor extends Component {
 
 	render(){
 		return(
-			<textarea id='editor' onKeyUp={this.keyHandler} onChange={this.changeHandler} defaultValue={defaultText} autoFocus='autoFocus' />
+			<textarea className='editor' id='editor' onKeyUp={this.keyHandler} onChange={this.changeHandler} defaultValue={defaultText} autoFocus='autoFocus' />
 		)
 	}
 }

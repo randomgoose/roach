@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import File from './File';
+import './Library.css';
 
 class Library extends Component {
     constructor(props){
@@ -22,12 +23,13 @@ class Library extends Component {
     render() {
         let files = this.state.fileList.map((file) => 
             <li key={this.state.fileList.indexOf(file)}
-                className={ this.state.selectedIndex === this.state.fileList.indexOf(JSON.parse(file)) ? "selected" : "unselected"}>
+                className={ this.state.selectedIndex === this.state.fileList.indexOf(file) ? "selected" : "unselected"}>
                 <File title={JSON.parse(file).title} content={JSON.parse(file).content} index={this.state.fileList.indexOf(file)} selectFile={this.selectFile}/>
             </li>)
 
         return(
-            <div id="library">
+            <div id="library" className="library">
+                <input type="search"></input>
                 {this.state.selectedIndex}
                 <ul>
                 {files}

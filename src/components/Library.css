@@ -1,0 +1,33 @@
+
+li.unselected {
+    width: 100%;
+    height: 100px;
+    background-color: #333333;
+    list-style: none;
+    /* padding: 20px; */
+}
+
+.library li {
+    border-bottom: 1px solid #666666;
+}
+
+.library ul {
+    padding-inline-start: 0;
+}
+
+.library a {
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+li.selected{
+    width: 100%;
+    height: 100px;
+    background-color: #666666;
+    list-style: none;
+    /* padding: 20px; */
+    border-left: 3px solid #ffe400;
+}

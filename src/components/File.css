@@ -1,0 +1,19 @@
+.file {
+    display: flex;
+}
+
+.fileTitle {
+    color: white;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.fileExcerpt {
+    color: white;
+    margin-left: 20px;
+}
+
+.selected {
+    background-color: #3a3a3a;
+    border-left: 3px solid #3498db;
+}
