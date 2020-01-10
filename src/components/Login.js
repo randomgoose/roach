@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { LoginContext } from './LoginContext';
+import './Login.css';
+
 const axios = require('axios');
 axios.defaults.withCredentials = true;
 
@@ -55,7 +57,7 @@ class Login extends Component {
 
     render(){
         return(
-            <div>
+            <div className='Login'>
                 <form action="http://localhost:5000/login" method="POST">
                     <div>Log in see your library!</div>
                     <div>Username: </div>

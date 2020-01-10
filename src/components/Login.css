@@ -1,0 +1,18 @@
+.Login {
+    /* display: flex; */
+    /* justify-content: center; */
+    /* text-align: center; */
+    display: flex;
+    
+}
+
+input {
+    margin-top: 20px;
+    width: 200px;
+    height: 30px;
+    margin: 0 auto;
+    background-color: #333;
+    border: 1px solid #666;
+    border-radius: 0.2em;
+    color: white;
+}

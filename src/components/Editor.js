@@ -66,15 +66,15 @@ class Editor extends Component {
 	// 	};
 	// }
 	
-	countWords = function(){
+	countWords(){
 		return this.state.rawText.match(/\b[-?(\w+)?]+\b/gi).length;
 	};
 
-	countLines = function(){
+	countLines(){
 		return this.state.rawText.split('\n').length;
 	};
 	
-	changeHandler = function(event){
+	changeHandler(event){
 		event.preventDefault();
 		this.setState({
 			rawText: event.target.value 
@@ -86,7 +86,7 @@ class Editor extends Component {
 			});
 	};
 	
-	keyHandler = function(event){
+	keyHandler(event){
 		event.preventDefault();
 		console.log(event.which);
 		if(event.ctrlKey){

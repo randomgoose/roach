@@ -74,6 +74,10 @@ class ToolBar extends Component {
 		
 	}
 
+	addFile(){
+		let dateCreated = new Date();
+	}
+
 	saveDocument(){
 		fetch('/save', {
 			method: 'POST',

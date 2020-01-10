@@ -28,6 +28,8 @@ class Library extends Component {
             </li>)
 
         return(
+            // <button></button>
+            // <button></button>
             <div id="library" className="library">
                 <input type="search"></input>
                 {this.state.selectedIndex}
