@@ -60,12 +60,17 @@ class Login extends Component {
             <div className='Login'>
                 <form action="http://localhost:5000/login" method="POST">
                     <div>Log in see your library!</div>
-                    <div>Username: </div>
-                    <input name="username" id="username"></input>
-                    <div>Password: </div>
-                    <input name="password" id="password" type="password"></input>
+                    <div className="formGroup field">
+                        <label className="formLabel">Username</label>
+                        <input name="username" id="username" className="formField" placeholder="Username" required></input>
+                    </div>
+                    <div className="formGroup field">
+                        <labe className="formLabel">Password</labe>
+                        <input name="password" id="password" type="password" className="formField" placeholder="Password"></input>
+                    </div>
                     <br></br>
                     <input type="submit" onClick={this.login}></input>
+                    <a href="http://localhost:5000/signup">Create a new account</a>
                 </form>
             </div>
         )

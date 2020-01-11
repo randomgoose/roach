@@ -1,3 +1,10 @@
+:root {
+	--primary: #11998e;
+	--secondary: #38ef7d;
+	--white: #fff;
+	--gray: #9b9b9b;
+}
+
 .Login {
     /* display: flex; */
     /* justify-content: center; */
@@ -6,7 +13,7 @@
     
 }
 
-input {
+/* input {
     margin-top: 20px;
     width: 200px;
     height: 30px;
@@ -15,4 +22,21 @@ input {
     border: 1px solid #666;
     border-radius: 0.2em;
     color: white;
+} */
+
+.formField {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--gray);
+    outline: 0;
+    font-size: 1.3rem;
+    color: var(--white);
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.formField::placeholder {
+    color: 
 }
