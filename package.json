@@ -45,5 +45,8 @@
     "color": "#c41d00",
     "icon": null,
     "createdAt": 1578242345326
+  },
+  "devDependencies": {
+    "react-cookie": "^4.0.3"
   }
 }

@@ -9,7 +9,7 @@
     /* display: flex; */
     /* justify-content: center; */
     /* text-align: center; */
-    display: flex;
+    /* display: flex; */
     
 }
 
@@ -23,6 +23,13 @@
     border-radius: 0.2em;
     color: white;
 } */
+
+.formGroup {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 50%;
+}
 
 .formField {
     font-family: inherit;
@@ -38,5 +45,47 @@
 }
 
 .formField::placeholder {
-    color: 
+    color: transparent;
+}
+
+
+.formField:placeholder-shown ~ .formLabel {
+    font-size:  1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+.formLabel {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--gray);
+}
+
+.formField:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, var(--primary), var(--secondary));
+    border-image-slice: 1;
+}
+
+.formField:focus ~ .formLabel{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.formField:required{
+    box-shadow: none;
+}
+
+.formField:invalid{
+    box-shadow: none;
 }
