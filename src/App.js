@@ -5,12 +5,9 @@ import SideBar from './components/SideBar';
 import WordCounter from './components/WordCounter';
 import Preview from './components/Preview';
 import { jsPDF } from 'jspdf';
-import { LoginContext } from './components/LoginContext';
 import './App.css';
 import './style.css'
-
-const axios = require('axios');
-axios.defaults.withCredentials = true;
+import { UserContextConsumer, UserContextProvider, auth } from './components/Context/UserContext';
 
 class App extends React.Component {
 		state = {
@@ -18,12 +15,13 @@ class App extends React.Component {
 			wordsNum: defaultText.match(/\b[-?(\w+)?]+\b/gi).length,
 			linesNum: defaultText.split('\n').length,
 			sideBarCollapsed: true,
-			isLoggedIn: false,
-			loggedUser: '?'
 		}
 
 	componentDidMount() {
-	}
+		auth();
+    }
+
+    
 
 	changeTheme = (event) => {
 		let currentThemeLink = document.getElementById("theme");
@@ -60,19 +58,6 @@ class App extends React.Component {
 		// console.log(this.state.linesNum);
 	};
 
-	logout = () => {
-        fetch("http://localhost:8080/logout", { method: "GET", credentials: "include" })
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data);
-            })
-            .catch((err) => {
-                return err;
-            });
-    }
-
 	render() {
 		return (
 			<div id='container'>
@@ -81,9 +66,11 @@ class App extends React.Component {
 					updateText={this.updateText}
 					toggleSideBar={this.toggleSideBar}
 					collapsed={this.state.sideBarCollapsed} />
-				<LoginContext.Provider value={{ isLoggedIn: this.state.isLoggedIn, toggleLogin: this.toggleLogin, logout: this.logout, loggedUser: this.state.loggedUser}}>
-					<SideBar isLoggedIn={this.state.isLoggedIn} collapsed={this.state.sideBarCollapsed} updateText={this.updateText} />
-				</LoginContext.Provider>
+				<UserContextConsumer>
+					{ context => (
+						<SideBar isLoggedIn={context.isLoggedIn} collapsed={this.state.sideBarCollapsed} updateText={this.updateText} />
+					)}
+				</UserContextConsumer>
 				<Editor updateText={this.updateText} />
 				<Preview textToRender={this.state.textToRender} />
 				<WordCounter wordsNum={this.state.wordsNum} linesNum={this.state.linesNum} />

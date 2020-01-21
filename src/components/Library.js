@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import File from './File';
 import './Library.css';
-import { LoginContext } from './LoginContext';
 
 class Library extends Component {
     constructor(props){
@@ -17,6 +16,8 @@ class Library extends Component {
         this.setState({
             selectedIndex: index
         });
+        // this.props.updateText(this.state.fileList[index]);
+        // document.getElementById('editor').value = this.state.fileList[index].text;
     }
 
     render() {
@@ -29,18 +30,13 @@ class Library extends Component {
         return(
             // <button></button>
             // <button></button>
-            <LoginContext.Consumer>
-                {loginContext => 
-                    (<div id="library" className="library">
-                        <input type="search"></input>
-                        { this.state.selectedIndex }
-                        <ul>
-                        {files}
-                        </ul>
-                    </div>)
-                }
-            </LoginContext.Consumer>
-           
+            <div id="library" className="library">
+                <input type="search"></input>
+                {this.state.selectedIndex}
+                <ul>
+                {files}
+                </ul>
+            </div>
         )
     }
 }

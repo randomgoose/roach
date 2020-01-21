@@ -1,5 +1,7 @@
 import React from 'react';
 const { Provider, Consumer } = new React.createContext();
+const axios = require('axios');
+let auth;
 
 class UserContextProvider extends React.Component {
     state = {
@@ -9,20 +11,31 @@ class UserContextProvider extends React.Component {
     };
 
     login = (username, password) => {
-        fetch("http://localhost:8080/login", { username, password }, { method: "POST", credentials: "include" })
-            .then((response) => {
-                return response.json();
-            })
-            .then((user) => {
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let raw = JSON.stringify({"username": username, "password": password})
+
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow',
+            mode: 'cors',
+            credentials: 'include'
+          };
+
+        fetch("http://localhost:8080/login", requestOptions)
+            .then(response => response.json())
+            .then(user => {
                 this.setState({
                     isLoggedIn: true,
-                    id: user.id,
+                    id: user._id,
                     documents: user.documents
-                })
+                });
+                console.log(user);
             })
-            .catch((err) => {
-                return err;
-            });
+            .catch(error => console.log('error', error));
     }
 
 
@@ -30,7 +43,9 @@ class UserContextProvider extends React.Component {
         fetch("http://localhost:8080/logout", { method: "GET", credentials: "include"})
         .then(response => {
             this.setState({
-                isLoggedIn: false
+                isLoggedIn: false,
+                documents: [],
+                id: ""
             })
             return response.json();
         })
@@ -40,37 +55,46 @@ class UserContextProvider extends React.Component {
     }
 
     auth = () => {
-        fetch("http://localhost:8080/auth", { method: "GET", credentials: "include" })
-			.then((response) => {
-				return response.json();
-			})
-			.then((user) => {
-                if (user) {
-                    this.setState({
-                        isLoggedIn: true,
-                        id: user.id,
-                        documents: user.documents
-                    });    
-                } else {
-                    this.setState({
-                        isLoggedIn: false,
-                        id: "",
-                        documents: []
-                    })
-                }
-				
-			})
-			.catch((err) => {
-				return err;
-			});
+        let myHeaders = new Headers();
+        // myHeaders.append("Content-Type", "application/");
+
+        let requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+        mode: "cors",
+        credentials: "include"
+        };
+
+        fetch("http://localhost:8080/auth", requestOptions)
+        .then(response => response.json())
+        .then(user => {
+            if(user.isLoggedIn) {
+                this.setState({
+                    isLoggedIn: true,
+                    id: user.id,
+                    documents: user.documents
+                });    
+            }
+            else {
+                this.setState({
+                    isLoggedIn: false,
+                    id: "",
+                    documents: []
+                })
+            }
+        })
+        .catch(error => console.log('error', error));
     }
 
     render() {
+        const context = this.state;
+        auth = this.auth;
         return (
-            <Provider>
+            <Provider value={{isLoggedIn: context.isLoggedIn, id: context.id, documents: context.documents, login: this.login, logout: this.logout, auth: this.auth}}>
                 {this.props.children}
             </Provider>)
     }
 }
 
-export { UserContextProvider, Consumer as UserContextConsumer }
+export { UserContextProvider, Consumer as UserContextConsumer, auth }
