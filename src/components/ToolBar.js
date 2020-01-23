@@ -74,8 +74,12 @@ class ToolBar extends Component {
 		
 	}
 
-	addFile(){
+	addFile () {
 		let dateCreated = new Date();
+	}
+
+	saveFile() {
+		
 	}
 
 	saveDocument(){

@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import './File.css';
 
 class File extends Component {
-    constructor(props){
-        super(props);
-    }
 
     clickHandler = event => {
         this.props.selectFile(this.props.index);

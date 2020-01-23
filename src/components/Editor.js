@@ -54,43 +54,37 @@ class Editor extends Component {
 		this.state = {
 			rawText: defaultText
 		};
-	this.changeHandler = this.changeHandler.bind(this);
-	this.countWords = this.countWords.bind(this);
-	this.keyHandler = this.keyHandler.bind(this);
+		this.changeHandler = this.changeHandler.bind(this);
+		this.countWords = this.countWords.bind(this);
+		this.keyHandler = this.keyHandler.bind(this);
 	}
 
-	// componentDidMount(){
-	// 	// console.log(document.getElementById('editor').innerHTML.match(/\b[-?(\w+)?]+\b/gi).length);
-	// 	WordCounter.defaultProps = {
-			
-	// 	};
-	// }
-	
-	countWords(){
+	countWords() {
 		return this.state.rawText.match(/\b[-?(\w+)?]+\b/gi).length;
 	};
 
-	countLines(){
+	countLines() {
 		return this.state.rawText.split('\n').length;
 	};
-	
-	changeHandler(event){
+
+	changeHandler(event) {
 		event.preventDefault();
 		this.setState({
-			rawText: event.target.value 
+			rawText: event.target.value
 		});
 		this.props.updateText(
-			{text: event.target.value,
-			 wordsNum: this.countWords(),
-			 linesNum: this.countLines()
+			{
+				text: event.target.value,
+				wordsNum: this.countWords(),
+				linesNum: this.countLines()
 			});
 	};
-	
-	keyHandler(event){
+
+	keyHandler(event) {
 		event.preventDefault();
 		console.log(event.which);
-		if(event.ctrlKey){
-			switch(event.which){
+		if (event.ctrlKey) {
+			switch (event.which) {
 				case 66:
 					console.log('Keyboard Shortcuts: Bold');
 					break;
@@ -103,9 +97,14 @@ class Editor extends Component {
 		}
 	};
 
-	render(){
-		return(
-			<textarea className='editor' id='editor' onKeyUp={this.keyHandler} onChange={this.changeHandler} defaultValue={defaultText} autoFocus='autoFocus' />
+	render() {
+		return (
+			<textarea className='editor'
+				id='editor'
+				onKeyUp={this.keyHandler}
+				onChange={this.changeHandler}
+				defaultValue={defaultText}
+				autoFocus='autoFocus' />
 		)
 	}
 }

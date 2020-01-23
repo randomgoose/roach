@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 
 class WordCounter extends Component {
-	constructor(props) {
-		super(props);
-	}
-	
-	// componentDidMount(){}
 
 	render(){
 		return(
