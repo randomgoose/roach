@@ -14,7 +14,7 @@ class UserContextProvider extends React.Component {
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        let raw = JSON.stringify({"username": username, "password": password})
+        let raw = JSON.stringify({ "username": username, "password": password })
 
         let requestOptions = {
             method: 'POST',
@@ -23,7 +23,7 @@ class UserContextProvider extends React.Component {
             redirect: 'follow',
             mode: 'cors',
             credentials: 'include'
-          };
+        };
 
         fetch("http://localhost:8080/login", requestOptions)
             .then(response => response.json())
@@ -40,18 +40,18 @@ class UserContextProvider extends React.Component {
 
 
     logout = () => {
-        fetch("http://localhost:8080/logout", { method: "GET", credentials: "include"})
-        .then(response => {
-            this.setState({
-                isLoggedIn: false,
-                documents: [],
-                id: ""
+        fetch("http://localhost:8080/logout", { method: "GET", credentials: "include" })
+            .then(response => {
+                this.setState({
+                    isLoggedIn: false,
+                    documents: [],
+                    id: ""
+                })
+                return response.json();
             })
-            return response.json();
-        })
-        .catch(err => {
-            return err;
-        });
+            .catch(err => {
+                return err;
+            });
     }
 
     auth = () => {
@@ -59,39 +59,39 @@ class UserContextProvider extends React.Component {
         // myHeaders.append("Content-Type", "application/");
 
         let requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow',
-        mode: "cors",
-        credentials: "include"
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow',
+            mode: "cors",
+            credentials: "include"
         };
 
         fetch("http://localhost:8080/auth", requestOptions)
-        .then(response => response.json())
-        .then(user => {
-            if(user.isLoggedIn) {
-                this.setState({
-                    isLoggedIn: true,
-                    id: user.id,
-                    documents: user.documents
-                });    
-            }
-            else {
-                this.setState({
-                    isLoggedIn: false,
-                    id: "",
-                    documents: []
-                })
-            }
-        })
-        .catch(error => console.log('error', error));
+            .then(response => response.json())
+            .then(user => {
+                if (user.isLoggedIn) {
+                    this.setState({
+                        isLoggedIn: true,
+                        id: user.id,
+                        documents: user.documents
+                    });
+                }
+                else {
+                    this.setState({
+                        isLoggedIn: false,
+                        id: "",
+                        documents: []
+                    })
+                }
+            })
+            .catch(error => console.log('error', error));
     }
 
     render() {
         const context = this.state;
         auth = this.auth;
         return (
-            <Provider value={{isLoggedIn: context.isLoggedIn, id: context.id, documents: context.documents, login: this.login, logout: this.logout, auth: this.auth}}>
+            <Provider value={{ isLoggedIn: context.isLoggedIn, id: context.id, documents: context.documents, login: this.login, logout: this.logout, auth: this.auth }}>
                 {this.props.children}
             </Provider>)
     }

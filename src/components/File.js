@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
 import './File.css';
+import { DocumentContextConsumer } from './Context/DocumentContext'
 
 class File extends Component {
 
-    clickHandler = event => {
-        this.props.selectFile(this.props.index);
-    }
-
     render() {
-        return(
-            <div className="file">
-                <a href="#" onClick={this.clickHandler}>
-                    <div className="fileTitle">{this.props.title}</div>
-                    <div className="fileExcerpt">{this.props.content}</div>
-                </a>
-            </div>
+        return (
+            <DocumentContextConsumer>
+                {DocumentContext => (
+                    <div className="file">
+                        <a href="#" onClick={() => {
+                            DocumentContext.updateText(this.props.content);
+                            DocumentContext.updateDocumentID(this.props.id);
+                            this.props.selectFile(this.props.index);
+                        }}>
+                            {/* <div className="fileID">{this.props.title}</div> */}
+                            <div className="fileExcerpt">{this.props.content}</div>
+                            <div className="timeCreated">{this.props.timeCreated}</div>
+                            <div className="fileID">{this.props.id}</div>
+                        </a>
+                    </div>)}
+            </DocumentContextConsumer>
+
         )
     }
 }

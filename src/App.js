@@ -1,5 +1,5 @@
 import React from 'react';
-import Editor, { defaultText } from './components/Editor';
+import Editor from './components/Editor';
 import ToolBar from './components/ToolBar';
 import SideBar from './components/SideBar';
 import WordCounter from './components/WordCounter';
@@ -8,20 +8,19 @@ import { jsPDF } from 'jspdf';
 import './App.css';
 import './style.css'
 import { UserContextConsumer, UserContextProvider, auth } from './components/Context/UserContext';
+import { DocumentContextProvider, DocumentContextConsumer } from './components/Context/DocumentContext';
 
 class App extends React.Component {
 		state = {
-			textToRender: defaultText,
-			wordsNum: defaultText.match(/\b[-?(\w+)?]+\b/gi).length,
-			linesNum: defaultText.split('\n').length,
+			// textToRender: defaultText,
+			// wordsNum: defaultText.match(/\b[-?(\w+)?]+\b/gi).length,
+			// linesNum: defaultText.split('\n').length,
 			sideBarCollapsed: true,
 		}
 
 	componentDidMount() {
 		auth();
     }
-
-    
 
 	changeTheme = (event) => {
 		let currentThemeLink = document.getElementById("theme");
@@ -52,8 +51,8 @@ class App extends React.Component {
 	updateText = text => {
 		this.setState({
 			textToRender: text.text,
-			wordsNum: text.wordsNum,
-			linesNum: text.linesNum
+			// wordsNum: text.wordsNum,
+			// linesNum: text.linesNum
 		});
 		// console.log(this.state.linesNum);
 	};
@@ -67,13 +66,19 @@ class App extends React.Component {
 					toggleSideBar={this.toggleSideBar}
 					collapsed={this.state.sideBarCollapsed} />
 				<UserContextConsumer>
-					{ context => (
-						<SideBar isLoggedIn={context.isLoggedIn} collapsed={this.state.sideBarCollapsed} updateText={this.updateText} />
+					{ UserContext => (
+						<SideBar isLoggedIn={UserContext.isLoggedIn} collapsed={this.state.sideBarCollapsed} updateText={this.updateText} />
 					)}
 				</UserContextConsumer>
-				<Editor updateText={this.updateText} />
-				<Preview textToRender={this.state.textToRender} />
-				<WordCounter wordsNum={this.state.wordsNum} linesNum={this.state.linesNum} />
+				<DocumentContextConsumer>
+					{ DocumentContext => (
+						<React.Fragment>
+							<Editor updateText={DocumentContext.updateText} rawText={DocumentContext.rawText}/>
+							<Preview textToRender={DocumentContext.rawText}/>
+							<WordCounter wordsNum={DocumentContext.wordsNum} linesNum={DocumentContext.linesNum} />
+						</React.Fragment>
+					) }
+				</DocumentContextConsumer>
 			</div>
 		)
 	}

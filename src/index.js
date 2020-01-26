@@ -4,11 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { UserContextProvider } from './components/Context/UserContext';
-import { faThermometerEmpty } from '@fortawesome/free-solid-svg-icons';
+import { DocumentContextProvider } from './components/Context/DocumentContext';
 
 ReactDOM.render(
     <UserContextProvider>
-        <App />
+        <DocumentContextProvider>
+            <App />
+        </DocumentContextProvider>
     </UserContextProvider>,
     document.getElementById('root'));
 
