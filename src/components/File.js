@@ -14,10 +14,11 @@ class File extends Component {
                             DocumentContext.updateDocumentID(this.props.id);
                             this.props.selectFile(this.props.index);
                         }}>
-                            {/* <div className="fileID">{this.props.title}</div> */}
-                            <div className="fileExcerpt">{this.props.content}</div>
                             <div className="timeCreated">{this.props.timeCreated}</div>
-                            <div className="fileID">{this.props.id}</div>
+                            <div className="fileExcerpt">{this.props.content.length > 75 ? this.props.content.substring(0, 75) + '...' : this.props.content}</div>
+                            
+                            {/* <div className="fileID">{this.props.title}</div> */}
+                            {/* <div className="fileID">{this.props.id}</div> */}
                         </a>
                     </div>)}
             </DocumentContextConsumer>

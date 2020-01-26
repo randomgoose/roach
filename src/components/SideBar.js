@@ -16,12 +16,12 @@ class SideBar extends Component {
 				collapsed: this.props.collapsed,
 				fileList: []
 			}
+		}
 
-			this.updateFileList = (fileList) => {
-				this.setState({
-					fileList
-				})
-			}
+		updateFileList = (fileList) => {
+			this.setState({
+				fileList: [...fileList]
+			})
 		}
 
 		static getDerivedStateFromProps(props, state) {
@@ -29,14 +29,6 @@ class SideBar extends Component {
 				collapsed: props.collapsed
 			}
 		}
-
-
-		// componentWillReceiveProps({collapsed}) {
-		// 	this.setState({
-		// 		collapsed: this.props.collapsed
-		// 	})
-		//   }
-
 
 		render() {
 			return (

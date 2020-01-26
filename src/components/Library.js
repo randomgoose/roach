@@ -22,13 +22,20 @@ class Library extends Component {
         
     }
 
+    componentWillReceiveProps(nextProps){
+        // alert(nextProps.fileList.length)
+        this.setState(state => ({
+            fileList: nextProps.fileList.sort()
+        }))
+    }
+
     render() {
-        const fileList = this.state.fileList;
+        // const fileList = this.state.fileList;
         let files = this.state.fileList.map((file) => 
             <li key={this.state.fileList.indexOf(file)}
                 className={ this.state.selectedIndex === this.state.fileList.indexOf(file) ? "selected" : "unselected"}>
                 {/* <File id={JSON.parse(file).id} title={JSON.parse(file).title} content={JSON.parse(file).content} index={this.state.fileList.indexOf(file)} selectFile={this.selectFile}/> */}
-                <File content={file.content} index={fileList.indexOf(file)} id={file._id} timeCreated={file.timeCreated} selectFile={this.selectFile}></File>
+                <File content={file.content} index={this.state.fileList.indexOf(file)} id={file._id} timeCreated={file.timeCreated} selectFile={this.selectFile}></File>
             </li>)
         // console.log(this.state.fileList);
         return(

@@ -7,7 +7,7 @@ class UserContextProvider extends React.Component {
     state = {
         isLoggedIn: false,
         id: "",
-        documents: []
+        documents: [],
     };
 
     login = (username, password) => {
@@ -56,7 +56,6 @@ class UserContextProvider extends React.Component {
 
     auth = () => {
         let myHeaders = new Headers();
-        // myHeaders.append("Content-Type", "application/");
 
         let requestOptions = {
             method: 'GET',
@@ -73,8 +72,8 @@ class UserContextProvider extends React.Component {
                     this.setState({
                         isLoggedIn: true,
                         id: user.id,
-                        documents: user.documents
-                    });
+                        documents: [...user.documents]
+                    }, console.log(this.state.documents));
                 }
                 else {
                     this.setState({

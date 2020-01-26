@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { text } from '@fortawesome/fontawesome-svg-core';
+import './Preview.css';
 // import { marked } from 'marked';
 
 const marked = require('marked');

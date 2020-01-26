@@ -16,7 +16,8 @@ li.unselected {
 }
 
 .library a {
-    height: 100%;
+    height: 100px;
+    width: 100%;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -26,8 +27,12 @@ li.unselected {
 li.selected{
     width: 100%;
     height: 100px;
-    background-color: #666666;
+    background-color: #444;
     list-style: none;
-    /* padding: 20px; */
-    border-left: 3px solid #ffe400;
+    border-left: 4px solid #ffe400;
+}
+
+li {
+    transition: border-left 0.2s;
+    transition: background-color 0.1s;
 }

@@ -59,7 +59,7 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div id='container'>
+			<div className='container'>
 				<ToolBar changeTheme={this.changeTheme}
 					exportPDF={this.exportPDF}
 					updateText={this.updateText}

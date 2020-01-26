@@ -11,7 +11,7 @@ class DocumentContextProvider extends React.Component {
     updateDocumentID = (id) => {
         this.setState({
             documentID: id
-        }, () => { alert(this.state.documentID); });
+        }, () => { console.log(this.state.documentID); });
     }
 
     updateText = (rawText) => {
@@ -36,8 +36,9 @@ class DocumentContextProvider extends React.Component {
 
         fetch("http://localhost:8080/add", requestOptions)
             .then(response => response.json())
-            .then(data => { alert(data.info) })
+            .then(data => { console.log(data.info) })
             .catch(error => { alert(error); console.log('error', error) });
+        
     }
 
     saveDocument = () => {
@@ -57,7 +58,7 @@ class DocumentContextProvider extends React.Component {
 
         fetch("http://localhost:8080/save", requestOptions)
             .then(response => response.json())
-            .then(data => { alert(data.info) })
+            .then(data => { console.log(data.info) })
             .catch(error => { alert(error); console.log('error', error) });
     }
 
@@ -68,8 +69,6 @@ class DocumentContextProvider extends React.Component {
     countLines() {
         return this.state.rawText.length === 0 ? 0 : this.state.rawText.split('\n').length;
     };
-
-
 
     render() {
         return (
