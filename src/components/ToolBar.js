@@ -109,23 +109,23 @@ class ToolBar extends Component {
 
 		return (
 			<DocumentContextConsumer>
-				{ DocumentContext => (
+				{DocumentContext => (
 					<div id="toolBar">
-					<button className='btn' id='menu' onClick={this.props.toggleSideBar}>{menuIcon}</button>
-					<button className='btn' id='undo'><FontAwesomeIcon icon={faUndo} size="lg" /></button>
-					<button className='btn' id='redo'><FontAwesomeIcon icon={faRedo} size="lg" /></button>
-					<button className='btn' id='bold' onClick={this.setBold}><FontAwesomeIcon icon={faBold} size="lg" /></button>
-					<button className='btn' id='italic' onClick={this.setItalic}><FontAwesomeIcon icon={faItalic} size="lg" /></button>
-					<button className='btn' id='strike' onClick={this.setStrike}><FontAwesomeIcon icon={faStrikethrough} size="lg" /></button>
-					<button className='btn' id={'save'} onClick={DocumentContext.saveDocument}><FontAwesomeIcon icon={faSave} size="lg" /></button>
-					<button className='btn' id='export' onClick={this.props.exportPDF} ><FontAwesomeIcon icon={faFileExport} size="lg" /></button>
-					<select id='theme' onChange={this.props.changeTheme}>
-						<option value='Github'>Github</option>
-						<option value='Gothic'>Gothic</option>
-						<option value='Newsprint'>Newsprint</option>
-						<option value='Night'>Night</option>
-					</select>
-				</div>
+						<button className='btn' id='menu' onClick={this.props.toggleSideBar}>{menuIcon}</button>
+						<button className='btn' id='undo'><FontAwesomeIcon icon={faUndo} size="lg" /></button>
+						<button className='btn' id='redo'><FontAwesomeIcon icon={faRedo} size="lg" /></button>
+						<button className='btn' id='bold' onClick={this.setBold}><FontAwesomeIcon icon={faBold} size="lg" /></button>
+						<button className='btn' id='italic' onClick={this.setItalic}><FontAwesomeIcon icon={faItalic} size="lg" /></button>
+						<button className='btn' id='strike' onClick={this.setStrike}><FontAwesomeIcon icon={faStrikethrough} size="lg" /></button>
+						<button className='btn' id={'save'} onClick={DocumentContext.saveDocument}><FontAwesomeIcon icon={faSave} size="lg" /></button>
+						<button className='btn' id='export' onClick={this.props.exportPDF} ><FontAwesomeIcon icon={faFileExport} size="lg" /></button>
+						<select id='theme' onChange={this.props.changeTheme}>
+							<option value='Github'>Github</option>
+							<option value='Gothic'>Gothic</option>
+							<option value='Newsprint'>Newsprint</option>
+							<option value='Night'>Night</option>
+						</select>
+					</div>
 				)}
 			</DocumentContextConsumer>
 		);

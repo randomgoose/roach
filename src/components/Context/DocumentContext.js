@@ -1,5 +1,7 @@
 import React from 'react';
-import { auth } from './UserContext';
+import { auth, updateDocuments } from './UserContext';
+import uuid from 'react-uuid';
+
 const { Provider, Consumer } = React.createContext();
 
 class DocumentContextProvider extends React.Component {
@@ -24,6 +26,7 @@ class DocumentContextProvider extends React.Component {
     }
 
     addDocument = () => {
+
         let myHeaders = new Headers();
 
         let requestOptions = {
@@ -36,9 +39,9 @@ class DocumentContextProvider extends React.Component {
 
         fetch("http://localhost:8080/add", requestOptions)
             .then(response => response.json())
-            .then(data => { console.log(data.info) })
+            .then(data => { updateDocuments(data.documents)}) 
             .catch(error => { alert(error); console.log('error', error) });
-        
+    
     }
 
     saveDocument = () => {
@@ -62,6 +65,23 @@ class DocumentContextProvider extends React.Component {
             .catch(error => { alert(error); console.log('error', error) });
     }
 
+    // getDocuments = () => {
+    //     let myHeaders = new Headers();
+
+    //     let requestOptions = {
+    //         method: 'GET',
+    //         headers: myHeaders,
+    //         redirect: 'follow',
+    //         mode: 'cors',
+    //         credentials: 'include'
+    //     };
+
+    //     fetch("http://localhost:8080/get", requestOptions)
+    //         .then(response => response.json())
+    //         .then(data => { updateDocuments(data.documents)}) 
+    //         .catch(error => { alert(error); console.log('error', error) });
+    // }
+
     countWords() {
         return this.state.rawText.length === 0 ? 0 : this.state.rawText.match(/\b[-?(\w+)?]+\b/gi).length;
     };
@@ -80,7 +100,8 @@ class DocumentContextProvider extends React.Component {
                 updateDocumentID: this.updateDocumentID,
                 wordsNum: this.countWords(),
                 linesNum: this.countLines(),
-                addDocument: this.addDocument
+                addDocument: this.addDocument,
+                getDocuments: this.getDocuments
             }}>
                 {this.props.children}
             </Provider>

@@ -2,6 +2,7 @@ import React from 'react';
 const { Provider, Consumer } = new React.createContext();
 const axios = require('axios');
 let auth;
+let updateDocuments;
 
 class UserContextProvider extends React.Component {
     state = {
@@ -9,6 +10,12 @@ class UserContextProvider extends React.Component {
         id: "",
         documents: [],
     };
+
+    updateDocuments = (documents) => {
+        this.setState({
+            documents: documents
+        });
+    }
 
     login = (username, password) => {
         let myHeaders = new Headers();
@@ -37,7 +44,6 @@ class UserContextProvider extends React.Component {
             })
             .catch(error => console.log('error', error));
     }
-
 
     logout = () => {
         fetch("http://localhost:8080/logout", { method: "GET", credentials: "include" })
@@ -89,11 +95,12 @@ class UserContextProvider extends React.Component {
     render() {
         const context = this.state;
         auth = this.auth;
+        updateDocuments = this.updateDocuments;
         return (
-            <Provider value={{ isLoggedIn: context.isLoggedIn, id: context.id, documents: context.documents, login: this.login, logout: this.logout, auth: this.auth }}>
+            <Provider value={{ isLoggedIn: context.isLoggedIn, id: context.id, documents: context.documents, login: this.login, logout: this.logout, auth: this.auth, updateDocuments: this.updateDocuments}}>
                 {this.props.children}
             </Provider>)
     }
 }
 
-export { UserContextProvider, Consumer as UserContextConsumer, auth }
+export { UserContextProvider, Consumer as UserContextConsumer, auth, updateDocuments }

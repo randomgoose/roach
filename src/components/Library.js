@@ -43,7 +43,7 @@ class Library extends Component {
                 { DocumentContext => (
                     <div id="library" className="library">
                     <input type="search"></input>
-                    <button className='btn' onClick={DocumentContext.addDocument}><FontAwesomeIcon icon={ faPlus } size="lg" /></button>
+                    <button className='btn' onClick={() => { DocumentContext.addDocument();}} ><FontAwesomeIcon icon={ faPlus } size="lg" /></button>
                     {this.state.selectedIndex}
                     <ul>
                     {files}
