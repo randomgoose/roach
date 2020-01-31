@@ -4,7 +4,7 @@ import ToolBar from './components/ToolBar';
 import SideBar from './components/SideBar';
 import WordCounter from './components/WordCounter';
 import Preview from './components/Preview';
-import { jsPDF } from 'jspdf';
+// import { jsPDF } from 'jspdf';
 import './App.css';
 import './style.css'
 import { UserContextConsumer, UserContextProvider, auth } from './components/Context/UserContext';
@@ -28,11 +28,11 @@ class App extends React.Component {
 		console.log(currentThemeLink);
 	}
 
-	exportPDF = () => {
-		let doc = new jsPDF();
-		doc.text('Hello world!', 10, 10);
-		doc.save('a4.pdf');
-	}
+	// exportPDF = () => {
+	// 	let doc = new jsPDF();
+	// 	doc.text('Hello world!', 10, 10);
+	// 	doc.save('a4.pdf');
+	// }
 
 	toggleSideBar = () => {
 		this.setState({

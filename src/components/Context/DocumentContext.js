@@ -37,7 +37,7 @@ class DocumentContextProvider extends React.Component {
             credentials: "include"
         };
 
-        fetch("http://localhost:8080/add", requestOptions)
+        fetch("http://t-9.tools:8080/add", requestOptions)
             .then(response => response.json())
             .then(data => { updateDocuments(data.documents)}) 
             .catch(error => { alert(error); console.log('error', error) });
@@ -59,9 +59,9 @@ class DocumentContextProvider extends React.Component {
             credentials: 'include'
         };
 
-        fetch("http://localhost:8080/save", requestOptions)
+        fetch("http://t-9.tools:8080/save", requestOptions)
             .then(response => response.json())
-            .then(data => { console.log(data.info) })
+            .then(data => { alert(data.info) })
             .catch(error => { alert(error); console.log('error', error) });
     }
 
@@ -82,12 +82,22 @@ class DocumentContextProvider extends React.Component {
     //         .catch(error => { alert(error); console.log('error', error) });
     // }
 
-    countWords() {
-        return this.state.rawText.length === 0 ? 0 : this.state.rawText.match(/\b[-?(\w+)?]+\b/gi).length;
+    countWords = () => {
+	// if (this.state.rawText != null){
+	// 	return this.state.rawText.length === 0 ? 0 : this.state.rawText.match(/\b[-?(\w+)?]+\b/gi).length;
+    // 	} else {
+	// 	return 0
+    // }
+        return this.state.rawText.match(/\b[-?(\w+)?]+\b/gi) == null ? 0 : this.state.rawText.match(/\b[-?(\w+)?]+\b/gi).length;
     };
 
-    countLines() {
-        return this.state.rawText.length === 0 ? 0 : this.state.rawText.split('\n').length;
+    countLines = () => {
+        return this.state.rawText.split('\n') == null ? 0 : this.state.rawText.split('\n').length;
+	// if (this.state.rawText != null) {
+    //     	return this.state.rawText.length === 0 ? 0 : this.state.rawText.split('\n').length;
+	// } else {
+	// 	return 0
+    // }
     };
 
     render() {

@@ -5,10 +5,11 @@ import './Editor.css';
 class Editor extends Component {
 
 	state = {
-		rawText: this.props.rawText
+		rawText: ''
 	}
 
 	componentWillReceiveProps(nextProps){
+		console.log("in component will receive props", nextProps)
 		this.setState({
 			rawText: nextProps.rawText
 		})
@@ -18,7 +19,7 @@ class Editor extends Component {
 		this.setState({
 			rawText: event.target.value
 		}, () => {
-			console.log("editor state", this.state.rawText);
+			// console.log("editor state", this.state.rawText);
 			this.props.updateText(this.state.rawText);
 			// console.log("editor value", event.target.value);
 		})
