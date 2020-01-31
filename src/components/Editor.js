@@ -26,15 +26,18 @@ class Editor extends Component {
 	};
 
 	keyHandler = (event) => {
-		event.preventDefault();
-		console.log(event.which);
-		if (event.ctrlKey) {
+
+		if (event.metaKey) {
 			switch (event.which) {
 				case 66:
-					console.log('Keyboard Shortcuts: Bold');
+					this.props.setStyle("bold");
 					break;
 				case 73:
-					console.log('Keyboard Shortcuts: Italic');
+					this.props.setStyle("italic");
+					break;
+				case 83:
+					event.preventDefault();
+					this.props.saveDocument();
 					break;
 				default:
 					console.log('unknown');
@@ -47,7 +50,7 @@ class Editor extends Component {
 			<textarea className='editor'
 				value={this.state.rawText}
 				id='editor'
-				onKeyUp={this.keyHandler}
+				onKeyDown={this.keyHandler}
 				onChange={this.changeHandler}
 				autoFocus='autoFocus' />
 		)

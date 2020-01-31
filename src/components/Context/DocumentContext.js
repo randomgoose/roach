@@ -2,9 +2,14 @@ import React from 'react';
 import { auth, updateDocuments } from './UserContext';
 import uuid from 'react-uuid';
 
+String.prototype.insertAt = function (index, string) {
+	return this.substring(0, index) + string + this.substring(index);
+};
+
 const { Provider, Consumer } = React.createContext();
 
 class DocumentContextProvider extends React.Component {
+
     state = {
         rawText: '',
         documentID: ''
@@ -37,7 +42,7 @@ class DocumentContextProvider extends React.Component {
             credentials: "include"
         };
 
-        fetch("http://t-9.tools:8080/add", requestOptions)
+        fetch("http://localhost:8080/add", requestOptions)
             .then(response => response.json())
             .then(data => { updateDocuments(data.documents)}) 
             .catch(error => { alert(error); console.log('error', error) });
@@ -59,28 +64,60 @@ class DocumentContextProvider extends React.Component {
             credentials: 'include'
         };
 
-        fetch("http://t-9.tools:8080/save", requestOptions)
+        fetch("http://localhost:8080/save", requestOptions)
             .then(response => response.json())
             .then(data => { alert(data.info) })
             .catch(error => { alert(error); console.log('error', error) });
     }
 
-    // getDocuments = () => {
-    //     let myHeaders = new Headers();
+    setStyle = (style) => {
+        let editor = document.getElementById("editor");
 
-    //     let requestOptions = {
-    //         method: 'GET',
-    //         headers: myHeaders,
-    //         redirect: 'follow',
-    //         mode: 'cors',
-    //         credentials: 'include'
-    //     };
+        let [selectionStart, selectionEnd] = [editor.selectionStart, editor.selectionEnd];
 
-    //     fetch("http://localhost:8080/get", requestOptions)
-    //         .then(response => response.json())
-    //         .then(data => { updateDocuments(data.documents)}) 
-    //         .catch(error => { alert(error); console.log('error', error) });
-    // }
+        switch(style){
+            case "bold":
+                this.setState(prevState => ({
+                    rawText: prevState.rawText.insertAt(selectionStart, '**').insertAt(selectionEnd + 2, "**")
+                }));
+                editor.setSelectionRange(selectionStart, selectionEnd + 4);
+                break;
+            case "italic":
+                this.setState(prevState => ({
+                    rawText: prevState.rawText.insertAt(selectionStart, "*").insertAt(selectionEnd + 1, "*")
+                }));
+                editor.setSelectionRange(selectionStart, selectionEnd + 2);
+                break;
+            case "strikethrough":
+                this.setState(prevState => ({
+                    rawText: prevState.rawText.insertAt(selectionStart, "~").insertAt(selectionEnd + 1, "~")
+                }));
+                editor.setSelectionRange(selectionStart, selectionEnd + 2);
+                break;
+            case "quote":
+                this.setState(prevState => ({
+                    rawText: prevState.rawText.insertAt(selectionStart, "> ")
+                }));
+                editor.setSelectionRange(selectionStart, selectionEnd + 2);
+                break;
+            case "unorderedList":
+                this.setState(prevState => ({
+                    rawText: prevState.rawText.insertAt(selectionStart, "- ")
+                }));
+                editor.setSelectionRange(selectionStart, selectionEnd + 2);
+                break;
+            case "orderedList":
+                this.setState(prevState => ({
+                    rawText: prevState.rawText.insertAt(selectionStart, "1. ")
+                }));
+                editor.setSelectionRange(selectionStart, selectionEnd + 2);
+                break;
+            default:
+                console.log("Set style");
+        }
+
+        editor.focus();
+    }
 
     countWords = () => {
 	// if (this.state.rawText != null){
@@ -93,11 +130,6 @@ class DocumentContextProvider extends React.Component {
 
     countLines = () => {
         return this.state.rawText.split('\n') == null ? 0 : this.state.rawText.split('\n').length;
-	// if (this.state.rawText != null) {
-    //     	return this.state.rawText.length === 0 ? 0 : this.state.rawText.split('\n').length;
-	// } else {
-	// 	return 0
-    // }
     };
 
     render() {
@@ -111,7 +143,8 @@ class DocumentContextProvider extends React.Component {
                 wordsNum: this.countWords(),
                 linesNum: this.countLines(),
                 addDocument: this.addDocument,
-                getDocuments: this.getDocuments
+                getDocuments: this.getDocuments,
+                setStyle: this.setStyle
             }}>
                 {this.props.children}
             </Provider>

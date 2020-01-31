@@ -73,7 +73,7 @@ class App extends React.Component {
 				<DocumentContextConsumer>
 					{ DocumentContext => (
 						<React.Fragment>
-							<Editor updateText={DocumentContext.updateText} rawText={DocumentContext.rawText}/>
+							<Editor saveDocument={DocumentContext.saveDocument} setStyle={DocumentContext.setStyle} updateText={DocumentContext.updateText} rawText={DocumentContext.rawText}/>
 							<Preview textToRender={DocumentContext.rawText}/>
 							<WordCounter wordsNum={DocumentContext.wordsNum} linesNum={DocumentContext.linesNum} />
 						</React.Fragment>

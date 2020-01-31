@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faUndo, faRedo, faBold, faItalic, faStrikethrough, faSave, faFileExport } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes, faUndo, faRedo, faBold, faItalic, faStrikethrough, faSave, faFileExport, faQuoteLeft, faList, faListOl } from '@fortawesome/free-solid-svg-icons';
 import { DocumentContextConsumer } from './Context/DocumentContext';
 
 
@@ -27,14 +27,6 @@ class ToolBar extends Component {
 		}
 	}
 
-	setStyle(style) {
-		let editor = document.getElementById('editor');
-		switch (style) {
-			case "Italic":
-
-		}
-	}
-
 	setItalic() {
 		let editor = document.getElementById('editor');
 		let selectionStart = editor.selectionStart;
@@ -49,8 +41,6 @@ class ToolBar extends Component {
 			text: editor.value
 		});
 
-
-		// alert(editor.selectionStart + 'to' + editor.selectionEnd);
 
 	}
 
@@ -114,10 +104,13 @@ class ToolBar extends Component {
 						<button className='btn' id='menu' onClick={this.props.toggleSideBar}>{menuIcon}</button>
 						<button className='btn' id='undo'><FontAwesomeIcon icon={faUndo} size="lg" /></button>
 						<button className='btn' id='redo'><FontAwesomeIcon icon={faRedo} size="lg" /></button>
-						<button className='btn' id='bold' onClick={this.setBold}><FontAwesomeIcon icon={faBold} size="lg" /></button>
-						<button className='btn' id='italic' onClick={this.setItalic}><FontAwesomeIcon icon={faItalic} size="lg" /></button>
-						<button className='btn' id='strike' onClick={this.setStrike}><FontAwesomeIcon icon={faStrikethrough} size="lg" /></button>
-						<button className='btn' id={'save'} onClick={DocumentContext.saveDocument}><FontAwesomeIcon icon={faSave} size="lg" /></button>
+						<button className='btn' id='bold' onClick={() => DocumentContext.setStyle("bold")}><FontAwesomeIcon icon={faBold} size="lg" /></button>
+						<button className='btn' id='italic' onClick={() => DocumentContext.setStyle("italic")}><FontAwesomeIcon icon={faItalic} size="lg" /></button>
+						<button className='btn' id='strike' onClick={() => DocumentContext.setStyle("strikethrough")}><FontAwesomeIcon icon={faStrikethrough} size="lg" /></button>
+						<button className='btn' id='quote' onClick={() => DocumentContext.setStyle("quote")}><FontAwesomeIcon icon={faQuoteLeft} size="lg" /></button>
+						<button className='btn' id='unorderedList' onClick={() => DocumentContext.setStyle("unorderedList")}><FontAwesomeIcon icon={faList} size="lg" /></button>
+						<button className='btn' id='orderedList' onClick={() => DocumentContext.setStyle("orderedList")}><FontAwesomeIcon icon={faListOl} size="lg" /></button>
+						<button className='btn' id='save' onClick={DocumentContext.saveDocument}><FontAwesomeIcon icon={faSave} size="lg" /></button>
 						<button className='btn' id='export' onClick={this.props.exportPDF} ><FontAwesomeIcon icon={faFileExport} size="lg" /></button>
 						<select id='theme' onChange={this.props.changeTheme}>
 							<option value='Github'>Github</option>
