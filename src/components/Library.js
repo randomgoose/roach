@@ -18,10 +18,9 @@ class Library extends Component {
     }
 
     selectFile = (index, id, rawText) => {
-        console.log("selected", id)
         this.setState({
             selectedIndex: index
-        }, () => { updateDocumentID(id); updateText(rawText); console.log(id)});
+        }, () => { updateDocumentID(id); updateText(rawText); });
     }
 
     componentWillReceiveProps(nextProps){
@@ -46,8 +45,7 @@ class Library extends Component {
     }
 
     render() {
-        selectFile = this.selectFile
-        // const fileList = this.state.fileList;
+        selectFile = this.selectFile;
         let files = this.state.fileList.map((file) => 
             <li key={this.state.fileList.indexOf(file)} index={this.state.fileList.indexOf(file)} 
                 className={ this.state.selectedIndex === this.state.fileList.indexOf(file) ? "selected" : "unselected"}>

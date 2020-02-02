@@ -16,19 +16,20 @@ class UserContextProvider extends React.Component {
     updateDocuments = (documents, index) => {
         let indexToSelect = parseInt(index);
         
-
         this.setState({
             documents: documents
         }, () => {
-            console.log("indexToSelect", typeof indexToSelect)
-            if (indexToSelect) {
+            if (indexToSelect || indexToSelect === 0) {
+                console.log("indexToSelect", indexToSelect)
                 selectFile(indexToSelect,
                         this.state.documents[indexToSelect]._id,
                         this.state.documents[indexToSelect].content)
             }
-            else selectFile(this.state.documents.length-1,
-                       this.state.documents[this.state.documents.length-1]._id,
-                       this.state.documents[this.state.documents.length-1].content) });
+            else {
+                selectFile(this.state.documents.length-1,
+                this.state.documents[this.state.documents.length-1]._id,
+                this.state.documents[this.state.documents.length-1].content) 
+            }});
     }
 
     login = (username, password) => {
@@ -94,6 +95,8 @@ class UserContextProvider extends React.Component {
                         id: user.id,
                         documents: [...user.documents]
                     });
+
+                    updateDocuments(user.documents, 0)
                 }
                 else {
                     this.setState({
