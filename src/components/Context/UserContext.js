@@ -31,6 +31,8 @@ class UserContextProvider extends React.Component {
                     this.state.documents[this.state.documents.length-1]._id,
                     this.state.documents[this.state.documents.length-1].content) 
                 }
+            } else {
+                selectFile(0, "", "")
             }
            });
     }
