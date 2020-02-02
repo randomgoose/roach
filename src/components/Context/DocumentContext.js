@@ -46,7 +46,7 @@ class DocumentContextProvider extends React.Component {
             credentials: "include"
         };
 
-        fetch("http://localhost:8080/add", requestOptions)
+        fetch("http://t-9.tools:8080/add", requestOptions)
             .then(response => response.json())
             .then(data => { updateDocuments(data.documents);}) 
             .catch(error => { alert(error); console.log('error', error) });
@@ -70,14 +70,19 @@ class DocumentContextProvider extends React.Component {
             credentials: 'include'
         };
 
-        fetch("http://localhost:8080/save", requestOptions)
+        fetch("http://t-9.tools:8080/save", requestOptions)
             .then(response => response.json())
             .then(data => { updateDocuments(data.documents, selectedIndex) })
             .catch(error => { alert(error); console.log('error', error) });
     }
 
     deleteDocument = () => {
-        let selectedIndex = document.getElementsByClassName("selected")[0].getAttribute("index") - 1;
+        let selectedIndex = document.getElementsByClassName("selected")[0] ? document.getElementsByClassName("selected")[0].getAttribute("index") - 1 : 0;
+        if (selectedIndex == -1){
+            selectedIndex = 0;
+        }
+
+        console.log('index to delete', selectedIndex)
 
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -93,7 +98,7 @@ class DocumentContextProvider extends React.Component {
             credentials: 'include'
         };
 
-        fetch("http://localhost:8080/delete", requestOptions)
+        fetch("http://t-9.tools:8080/delete", requestOptions)
             .then(response => response.json())
             .then(data => { updateDocuments(data.documents, selectedIndex) }) 
             .catch(error => { alert(error); console.log('error', error) });

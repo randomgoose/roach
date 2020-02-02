@@ -19,17 +19,20 @@ class UserContextProvider extends React.Component {
         this.setState({
             documents: documents
         }, () => {
-            if (indexToSelect || indexToSelect === 0) {
-                console.log("indexToSelect", indexToSelect)
-                selectFile(indexToSelect,
-                        this.state.documents[indexToSelect]._id,
-                        this.state.documents[indexToSelect].content)
+            if (documents.length > 0){
+                if (indexToSelect || indexToSelect === 0) {
+                    console.log("indexToSelect", indexToSelect)
+                    selectFile(indexToSelect,
+                            this.state.documents[indexToSelect]._id,
+                            this.state.documents[indexToSelect].content)
+                }
+                else {
+                    selectFile(this.state.documents.length-1,
+                    this.state.documents[this.state.documents.length-1]._id,
+                    this.state.documents[this.state.documents.length-1].content) 
+                }
             }
-            else {
-                selectFile(this.state.documents.length-1,
-                this.state.documents[this.state.documents.length-1]._id,
-                this.state.documents[this.state.documents.length-1].content) 
-            }});
+           });
     }
 
     login = (username, password) => {
@@ -47,7 +50,7 @@ class UserContextProvider extends React.Component {
             credentials: 'include'
         };
 
-        fetch("http://localhost:8080/login", requestOptions)
+        fetch("http://t-9.tools:8080/login", requestOptions)
             .then(response => response.json())
             .then(user => {
                 this.setState({
@@ -61,7 +64,7 @@ class UserContextProvider extends React.Component {
     }
 
     logout = () => {
-        fetch("http://localhost:8080/logout", { method: "GET", credentials: "include" })
+        fetch("http://t-9.tools:8080/logout", { method: "GET", credentials: "include" })
             .then(response => {
                 this.setState({
                     isLoggedIn: false,
@@ -86,7 +89,7 @@ class UserContextProvider extends React.Component {
             credentials: "include"
         };
 
-        fetch("http://localhost:8080/auth", requestOptions)
+        fetch("http://t-9.tools:8080/auth", requestOptions)
             .then(response => response.json())
             .then(user => {
                 if (user.isLoggedIn) {
