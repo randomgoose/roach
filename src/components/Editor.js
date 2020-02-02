@@ -43,7 +43,7 @@ class Editor extends Component {
 					console.log('unknown');
 			}
 		}
-	};
+	}
 
 	render() {
 		return (

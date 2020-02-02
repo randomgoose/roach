@@ -1,4 +1,6 @@
 import React from 'react';
+import { selectFile } from '../Library';
+import { updateDocumentID } from './DocumentContext';
 const { Provider, Consumer } = new React.createContext();
 const axios = require('axios');
 let auth;
@@ -11,10 +13,22 @@ class UserContextProvider extends React.Component {
         documents: [],
     };
 
-    updateDocuments = (documents) => {
+    updateDocuments = (documents, index) => {
+        let indexToSelect = parseInt(index);
+        
+
         this.setState({
             documents: documents
-        });
+        }, () => {
+            console.log("indexToSelect", typeof indexToSelect)
+            if (indexToSelect) {
+                selectFile(indexToSelect,
+                        this.state.documents[indexToSelect]._id,
+                        this.state.documents[indexToSelect].content)
+            }
+            else selectFile(this.state.documents.length-1,
+                       this.state.documents[this.state.documents.length-1]._id,
+                       this.state.documents[this.state.documents.length-1].content) });
     }
 
     login = (username, password) => {
@@ -79,7 +93,7 @@ class UserContextProvider extends React.Component {
                         isLoggedIn: true,
                         id: user.id,
                         documents: [...user.documents]
-                    }, console.log(this.state.documents));
+                    });
                 }
                 else {
                     this.setState({
@@ -97,7 +111,14 @@ class UserContextProvider extends React.Component {
         auth = this.auth;
         updateDocuments = this.updateDocuments;
         return (
-            <Provider value={{ isLoggedIn: context.isLoggedIn, id: context.id, documents: context.documents, login: this.login, logout: this.logout, auth: this.auth, updateDocuments: this.updateDocuments}}>
+            <Provider value={{ isLoggedIn: context.isLoggedIn,
+                               id: context.id,
+                               documents: context.documents,
+                               login: this.login,
+                               logout: this.logout,
+                               auth: this.auth,
+                               updateDocuments: this.updateDocuments 
+                               }}>
                 {this.props.children}
             </Provider>)
     }

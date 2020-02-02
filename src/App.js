@@ -28,12 +28,6 @@ class App extends React.Component {
 		console.log(currentThemeLink);
 	}
 
-	// exportPDF = () => {
-	// 	let doc = new jsPDF();
-	// 	doc.text('Hello world!', 10, 10);
-	// 	doc.save('a4.pdf');
-	// }
-
 	toggleSideBar = () => {
 		this.setState({
 			sideBarCollapsed: !this.state.sideBarCollapsed

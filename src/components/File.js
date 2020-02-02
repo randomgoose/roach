@@ -8,11 +8,11 @@ class File extends Component {
         return (
             <DocumentContextConsumer>
                 {DocumentContext => (
-                    <div className="file">
+                    <div className="file" id={this.props.id}>
                         <a href="#" onClick={() => {
                             DocumentContext.updateText(this.props.content);
                             DocumentContext.updateDocumentID(this.props.id);
-                            this.props.selectFile(this.props.index);
+                            this.props.selectFile(this.props.index, this.props.id, this.props.content);
                         }}>
                             <div className="timeCreated">{this.props.timeCreated}</div>
                             <div className="fileExcerpt">{this.props.content.length > 75 ? this.props.content.substring(0, 75) + '...' : this.props.content}</div>

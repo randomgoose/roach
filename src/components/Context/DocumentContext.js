@@ -1,6 +1,11 @@
 import React from 'react';
 import { auth, updateDocuments } from './UserContext';
 import uuid from 'react-uuid';
+import { selectFile } from '../Library';
+
+
+let updateDocumentID;
+let updateText;
 
 String.prototype.insertAt = function (index, string) {
 	return this.substring(0, index) + string + this.substring(index);
@@ -18,7 +23,7 @@ class DocumentContextProvider extends React.Component {
     updateDocumentID = (id) => {
         this.setState({
             documentID: id
-        }, () => { console.log(this.state.documentID); });
+        });
     }
 
     updateText = (rawText) => {
@@ -27,7 +32,6 @@ class DocumentContextProvider extends React.Component {
         }, () => {
             console.log("context text", this.state.rawText)
         })
-
     }
 
     addDocument = () => {
@@ -44,12 +48,14 @@ class DocumentContextProvider extends React.Component {
 
         fetch("http://localhost:8080/add", requestOptions)
             .then(response => response.json())
-            .then(data => { updateDocuments(data.documents)}) 
+            .then(data => { updateDocuments(data.documents);}) 
             .catch(error => { alert(error); console.log('error', error) });
-    
     }
+    
 
     saveDocument = () => {
+        let selectedIndex = document.getElementsByClassName("selected")[0].getAttribute("index");
+
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -66,7 +72,30 @@ class DocumentContextProvider extends React.Component {
 
         fetch("http://localhost:8080/save", requestOptions)
             .then(response => response.json())
-            .then(data => { alert(data.info) })
+            .then(data => { updateDocuments(data.documents, selectedIndex) })
+            .catch(error => { alert(error); console.log('error', error) });
+    }
+
+    deleteDocument = () => {
+        let selectedIndex = document.getElementsByClassName("selected")[0].getAttribute("index") - 1;
+
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let docToSave = JSON.stringify({ documentID: this.state.documentID, newContent: this.state.rawText })
+
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: docToSave,
+            redirect: 'follow',
+            mode: 'cors',
+            credentials: 'include'
+        };
+
+        fetch("http://localhost:8080/delete", requestOptions)
+            .then(response => response.json())
+            .then(data => { updateDocuments(data.documents, selectedIndex) }) 
             .catch(error => { alert(error); console.log('error', error) });
     }
 
@@ -120,11 +149,6 @@ class DocumentContextProvider extends React.Component {
     }
 
     countWords = () => {
-	// if (this.state.rawText != null){
-	// 	return this.state.rawText.length === 0 ? 0 : this.state.rawText.match(/\b[-?(\w+)?]+\b/gi).length;
-    // 	} else {
-	// 	return 0
-    // }
         return this.state.rawText.match(/\b[-?(\w+)?]+\b/gi) == null ? 0 : this.state.rawText.match(/\b[-?(\w+)?]+\b/gi).length;
     };
 
@@ -133,6 +157,9 @@ class DocumentContextProvider extends React.Component {
     };
 
     render() {
+        updateDocumentID = this.updateDocumentID;
+        updateText = this.updateText;
+
         return (
             <Provider value={{
                 // state: this.state,
@@ -144,6 +171,7 @@ class DocumentContextProvider extends React.Component {
                 linesNum: this.countLines(),
                 addDocument: this.addDocument,
                 getDocuments: this.getDocuments,
+                deleteDocument: this.deleteDocument,
                 setStyle: this.setStyle
             }}>
                 {this.props.children}
@@ -153,4 +181,4 @@ class DocumentContextProvider extends React.Component {
 
 }
 
-export { DocumentContextProvider, Consumer as DocumentContextConsumer }
+export { DocumentContextProvider, Consumer as DocumentContextConsumer, updateDocumentID, updateText }
