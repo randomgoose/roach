@@ -46,10 +46,10 @@ class DocumentContextProvider extends React.Component {
             credentials: "include"
         };
 
-        fetch("http://t-9.tools:8080/add", requestOptions)
+        fetch("http://localhost:8080/add", requestOptions)
             .then(response => response.json())
             .then(data => { updateDocuments(data.documents);}) 
-            .catch(error => { alert(error); console.log('error', error) });
+            .catch(error => { console.log('error', error) });
     }
     
 
@@ -70,7 +70,7 @@ class DocumentContextProvider extends React.Component {
             credentials: 'include'
         };
 
-        fetch("http://t-9.tools:8080/save", requestOptions)
+        fetch("http://localhost:8080/save", requestOptions)
             .then(response => response.json())
             .then(data => { updateDocuments(data.documents, selectedIndex) })
             .catch(error => { alert(error); console.log('error', error) });
@@ -98,7 +98,7 @@ class DocumentContextProvider extends React.Component {
             credentials: 'include'
         };
 
-        fetch("http://t-9.tools:8080/delete", requestOptions)
+        fetch("http://localhost:8080/delete", requestOptions)
             .then(response => response.json())
             .then(data => { updateDocuments(data.documents, selectedIndex) }) 
             .catch(error => { alert(error); console.log('error', error) });

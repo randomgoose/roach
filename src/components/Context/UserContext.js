@@ -52,7 +52,7 @@ class UserContextProvider extends React.Component {
             credentials: 'include'
         };
 
-        fetch("http://t-9.tools:8080/login", requestOptions)
+        fetch("http://localhost:8080/login", requestOptions)
             .then(response => response.json())
             .then(user => {
                 this.setState({
@@ -66,7 +66,7 @@ class UserContextProvider extends React.Component {
     }
 
     logout = () => {
-        fetch("http://t-9.tools:8080/logout", { method: "GET", credentials: "include" })
+        fetch("http://localhost:8080/logout", { method: "GET", credentials: "include" })
             .then(response => {
                 this.setState({
                     isLoggedIn: false,
@@ -91,7 +91,7 @@ class UserContextProvider extends React.Component {
             credentials: "include"
         };
 
-        fetch("http://t-9.tools:8080/auth", requestOptions)
+        fetch("http://localhost:8080/auth", requestOptions)
             .then(response => response.json())
             .then(user => {
                 if (user.isLoggedIn) {

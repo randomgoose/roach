@@ -9,36 +9,53 @@ class Login extends Component {
     }
 
     changeHandler = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         this.setState({
             [name]: value
         })
     }
 
-    render(){
+    render() {
         const { username, password } = this.state;
-        return(
+        return (
             <UserContextConsumer>
-                { context => (
+                {context => (
                     <div className='Login'>
-                    <form>
-                        <div>Log in see your library!</div>
-                        <div className="formGroup field">
-                            <input value={this.state.username} name="username" id="username" className="formField" placeholder="Username" onChange={this.changeHandler} required></input>
-                            <label className="formLabel" htmlFor="username">Username</label>
-                            
-                        </div>
-                        <div className="formGroup field">
-                            <input value={this.state.password} name="password" id="password" type="password" className="formField" placeholder="Password" onChange={this.changeHandler} required></input>
-                            <label className="formLabel" htmlFor="password">Password</label>
-                        </div>
-                        <br></br>
-                        <button onClick={(e) => {e.preventDefault(); context.login(username, password)}}></button>
-                        {/* <a href="http://localhost:8080/signup">Create a new account</a> */}
-                    </form>
-                </div>
+                        <form>
+                            <div className="Header">Welcome back!</div>
+                            <div className="Text">Log in to use your library!</div>
+                            <div className="formGroup field">
+                                <input value={this.state.username}
+                                    name="username"
+                                    id="username"
+                                    className="formField"
+                                    placeholder="Username"
+                                    onChange={this.changeHandler}
+                                    autoComplete="off"
+                                    required></input>
+                                <label className="formLabel" htmlFor="username">Username</label>
+
+                            </div>
+                            <div className="formGroup field">
+                                <input value={this.state.password}
+                                    name="password"
+                                    id="password"
+                                    type="password"
+                                    className="formField"
+                                    placeholder="Password"
+                                    onChange={this.changeHandler}
+                                    required></input>
+                                <label className="formLabel" htmlFor="password">Password</label>
+                            </div>
+                            <br></br>
+                            <button className="mainButton" onClick={(e) => { e.preventDefault(); context.login(username, password) }}>LOGIN</button>
+                            <div className="Text">OR</div>
+                            <a href={context.signup}>Create a new account</a>
+                            {/* <a href="http://localhost:8080/signup">Create a new account</a> */}
+                        </form>
+                    </div>
                 )}
-            </UserContextConsumer>    
+            </UserContextConsumer>
         )
     }
 }

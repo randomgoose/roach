@@ -2,13 +2,15 @@
 li.unselected {
     width: 100%;
     height: 100px;
-    background-color: #333333;
+    background-color: #fff;
     list-style: none;
+    color: #333;
     /* padding: 20px; */
 }
 
 .library li {
-    border-bottom: 1px solid #666666;
+    border-bottom: 1px solid #eee;
+    color: #fff;
 }
 
 .library ul {
@@ -27,7 +29,7 @@ li.unselected {
 li.selected{
     width: 100%;
     height: 100px;
-    background-color: #444;
+    background-color: #fff;
     list-style: none;
     border-left: 4px solid #ffe400;
 }
@@ -35,4 +37,8 @@ li.selected{
 li {
     transition: border-left 0.2s;
     transition: background-color 0.1s;
+}
+
+.Search {
+    border-radius: 20px;
 }
