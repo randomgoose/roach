@@ -102,8 +102,8 @@ class ToolBar extends Component {
 				{DocumentContext => (
 					<div id="toolBar">
 						<button className='btn' id='menu' onClick={this.props.toggleSideBar}>{menuIcon}</button>
-						<button className='btn' id='undo'><FontAwesomeIcon icon={faUndo} size="lg" /></button>
-						<button className='btn' id='redo'><FontAwesomeIcon icon={faRedo} size="lg" /></button>
+						<button className='btn' id='undo' onClick={() => {DocumentContext.undo();}}><FontAwesomeIcon icon={faUndo} size="lg" /></button>
+						<button className='btn' id='redo' onClick={() => {DocumentContext.redo();}}><FontAwesomeIcon icon={faRedo} size="lg" /></button>
 						<button className='btn' id='bold' onClick={() => DocumentContext.setStyle("bold")}><FontAwesomeIcon icon={faBold} size="lg" /></button>
 						<button className='btn' id='italic' onClick={() => DocumentContext.setStyle("italic")}><FontAwesomeIcon icon={faItalic} size="lg" /></button>
 						<button className='btn' id='strike' onClick={() => DocumentContext.setStyle("strikethrough")}><FontAwesomeIcon icon={faStrikethrough} size="lg" /></button>

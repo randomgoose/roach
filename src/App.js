@@ -67,8 +67,13 @@ class App extends React.Component {
 				<DocumentContextConsumer>
 					{ DocumentContext => (
 						<React.Fragment>
-							<Editor saveDocument={DocumentContext.saveDocument} setStyle={DocumentContext.setStyle} updateText={DocumentContext.updateText} rawText={DocumentContext.rawText}/>
-							<Preview textToRender={DocumentContext.rawText}/>
+							<Editor undo={DocumentContext.undo}
+									redo={DocumentContext.redo}
+									saveDocument={DocumentContext.saveDocument}
+									setStyle={DocumentContext.setStyle}
+									updateText={DocumentContext.updateText}
+									rawText={DocumentContext.rawText}/>
+							<Preview textToRender={DocumentContext.rawText.present}/>
 							<WordCounter wordsNum={DocumentContext.wordsNum} linesNum={DocumentContext.linesNum} />
 						</React.Fragment>
 					) }

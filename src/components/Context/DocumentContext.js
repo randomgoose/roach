@@ -16,7 +16,11 @@ const { Provider, Consumer } = React.createContext();
 class DocumentContextProvider extends React.Component {
 
     state = {
-        rawText: '',
+        rawText: {
+            history: [],
+            present: '',
+            future: []
+        },
         documentID: ''
     }
 
@@ -27,14 +31,21 @@ class DocumentContextProvider extends React.Component {
     }
 
     updateText = (rawText) => {
-        this.setState({
-            rawText: rawText
-        }, () => {
-            console.log("context text", this.state.rawText)
+        this.setState(prevState => ({
+            rawText: {
+                history: [prevState.rawText.present, ...prevState.rawText.history],
+                present: rawText,
+                future: []
+            }
+        }), () => {
+            console.log(
+                this.state.rawText
+            )
         })
     }
 
     addDocument = () => {
+        // let newDocument = 
 
         let myHeaders = new Headers();
 
@@ -50,6 +61,7 @@ class DocumentContextProvider extends React.Component {
             .then(response => response.json())
             .then(data => { updateDocuments(data.documents);}) 
             .catch(error => { console.log('error', error) });
+
     }
     
 
@@ -111,39 +123,27 @@ class DocumentContextProvider extends React.Component {
 
         switch(style){
             case "bold":
-                this.setState(prevState => ({
-                    rawText: prevState.rawText.insertAt(selectionStart, '**').insertAt(selectionEnd + 2, "**")
-                }));
+                this.updateText(this.state.rawText.present.insertAt(selectionStart, '**').insertAt(selectionEnd + 2, "**"))
                 editor.setSelectionRange(selectionStart, selectionEnd + 4);
                 break;
             case "italic":
-                this.setState(prevState => ({
-                    rawText: prevState.rawText.insertAt(selectionStart, "*").insertAt(selectionEnd + 1, "*")
-                }));
+                this.updateText(this.state.rawText.present.insertAt(selectionStart, "*").insertAt(selectionEnd + 1, "*"))
                 editor.setSelectionRange(selectionStart, selectionEnd + 2);
                 break;
             case "strikethrough":
-                this.setState(prevState => ({
-                    rawText: prevState.rawText.insertAt(selectionStart, "~").insertAt(selectionEnd + 1, "~")
-                }));
+                this.updateText(this.state.rawText.present.insertAt(selectionStart, "~").insertAt(selectionEnd + 1, "~"))
                 editor.setSelectionRange(selectionStart, selectionEnd + 2);
                 break;
             case "quote":
-                this.setState(prevState => ({
-                    rawText: prevState.rawText.insertAt(selectionStart, "> ")
-                }));
+                this.updateText(this.state.rawText.present.insertAt(selectionStart, "> "))
                 editor.setSelectionRange(selectionStart, selectionEnd + 2);
                 break;
             case "unorderedList":
-                this.setState(prevState => ({
-                    rawText: prevState.rawText.insertAt(selectionStart, "- ")
-                }));
+                this.updateText(this.state.rawText.present.insertAt(selectionStart, "- "))
                 editor.setSelectionRange(selectionStart, selectionEnd + 2);
                 break;
             case "orderedList":
-                this.setState(prevState => ({
-                    rawText: prevState.rawText.insertAt(selectionStart, "1. ")
-                }));
+                this.updateText(this.state.rawText.insertAt(selectionStart, "1. "))
                 editor.setSelectionRange(selectionStart, selectionEnd + 2);
                 break;
             default:
@@ -154,12 +154,39 @@ class DocumentContextProvider extends React.Component {
     }
 
     countWords = () => {
-        return this.state.rawText.match(/\b[-?(\w+)?]+\b/gi) == null ? 0 : this.state.rawText.match(/\b[-?(\w+)?]+\b/gi).length;
+        return this.state.rawText.present.match(/\b[-?(\w+)?]+\b/gi) == null ? 0 : this.state.rawText.present.match(/\b[-?(\w+)?]+\b/gi).length;
     };
 
     countLines = () => {
-        return this.state.rawText.split('\n') == null ? 0 : this.state.rawText.split('\n').length;
+        return this.state.rawText.present.split('\n') == null ? 0 : this.state.rawText.present.split('\n').length;
     };
+
+    undo = () => {
+        // this.setState
+        if (this.state.rawText.history.length > 0) {
+            this.setState({
+                rawText: {
+                    history: this.state.rawText.history.slice(1),
+                    present: this.state.rawText.history[0],
+                    future: [this.state.rawText.present, ...this.state.rawText.future]
+                }
+            }, () => {
+                console.log(this.state.rawText)
+            })
+        }
+    }
+
+    redo = () => {
+        if (this.state.rawText.future.length > 0) {
+            this.setState({
+                rawText: {
+                    history: [this.state.rawText.present, ...this.state.rawText.history],
+                    present:this.state.rawText.future[0],
+                    future: this.state.rawText.future.slice(1)
+                }
+            })
+        }
+    }
 
     render() {
         updateDocumentID = this.updateDocumentID;
@@ -177,7 +204,9 @@ class DocumentContextProvider extends React.Component {
                 addDocument: this.addDocument,
                 getDocuments: this.getDocuments,
                 deleteDocument: this.deleteDocument,
-                setStyle: this.setStyle
+                setStyle: this.setStyle,
+                undo: this.undo,
+                redo: this.redo
             }}>
                 {this.props.children}
             </Provider>

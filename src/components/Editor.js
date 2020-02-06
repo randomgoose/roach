@@ -11,7 +11,7 @@ class Editor extends Component {
 	componentWillReceiveProps(nextProps){
 		console.log("in component will receive props", nextProps)
 		this.setState({
-			rawText: nextProps.rawText
+			rawText: nextProps.rawText.present
 		})
 	}
 
@@ -26,18 +26,31 @@ class Editor extends Component {
 	};
 
 	keyHandler = (event) => {
+		console.log(event.which)
 
 		if (event.metaKey) {
 			switch (event.which) {
 				case 66:
+					// Set bold
 					this.props.setStyle("bold");
 					break;
 				case 73:
+					// Set italic
 					this.props.setStyle("italic");
 					break;
 				case 83:
+					// Save files
 					event.preventDefault();
 					this.props.saveDocument();
+					break;
+				case 90:
+					// Redo & undo
+					if (event.shiftKey) {
+						this.props.redo();	
+					} else {
+						event.preventDefault();
+						this.props.undo();
+					}
 					break;
 				default:
 					console.log('unknown');
