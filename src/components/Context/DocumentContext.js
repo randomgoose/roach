@@ -71,7 +71,7 @@ class DocumentContextProvider extends React.Component {
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        let docToSave = JSON.stringify({ documentID: this.state.documentID, newContent: this.state.rawText })
+        let docToSave = JSON.stringify({ documentID: this.state.documentID, newContent: this.state.rawText.present })
 
         let requestOptions = {
             method: 'POST',
@@ -84,7 +84,7 @@ class DocumentContextProvider extends React.Component {
 
         fetch("http://localhost:8080/save", requestOptions)
             .then(response => response.json())
-            .then(data => { updateDocuments(data.documents, selectedIndex) })
+            .then(data => { console.log(data.documents[selectedIndex]); updateDocuments(data.documents, selectedIndex) })
             .catch(error => { alert(error); console.log('error', error) });
     }
 

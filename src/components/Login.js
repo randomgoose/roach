@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { UserContextConsumer } from './Context/UserContext';
+import { Route, Switch, Link } from 'react-router-dom';
 import './Login.css';
+import Button from "./Button"
+import InputBox from "./InputBox"
 
 class Login extends Component {
     state = {
@@ -22,36 +25,17 @@ class Login extends Component {
                 {context => (
                     <div className='Login'>
                         <form>
-                            <div className="Header">Welcome back!</div>
-                            <div className="Text">Log in to use your library!</div>
-                            <div className="formGroup field">
-                                <input value={this.state.username}
-                                    name="username"
-                                    id="username"
-                                    className="formField"
-                                    placeholder="Username"
-                                    onChange={this.changeHandler}
-                                    autoComplete="off"
-                                    required></input>
-                                <label className="formLabel" htmlFor="username">Username</label>
+                            <h3 className="Header">Welcome back!</h3>
+                            <p className="Text">Log in to use your library!</p>
 
-                            </div>
-                            <div className="formGroup field">
-                                <input value={this.state.password}
-                                    name="password"
-                                    id="password"
-                                    type="password"
-                                    className="formField"
-                                    placeholder="Password"
-                                    onChange={this.changeHandler}
-                                    required></input>
-                                <label className="formLabel" htmlFor="password">Password</label>
-                            </div>
-                            <br></br>
-                            <button className="mainButton" onClick={(e) => { e.preventDefault(); context.login(username, password) }}>LOGIN</button>
-                            <div className="Text">OR</div>
-                            <a href={context.signup}>Create a new account</a>
+                            <InputBox value={this.state.username} type={"username"} handler={this.changeHandler}></InputBox>
+                            <InputBox value={this.state.password} type={"password"} handler={this.changeHandler}></InputBox>
+
+                            <Button handler={(e) => { e.preventDefault(); context.login(username, password) }} type={"Primary"} name="LOGIN"/>
+                            <p className="Text Center">OR</p>
+                            {/* <a href={context.signup}>Create a new account</a> */}
                             {/* <a href="http://localhost:8080/signup">Create a new account</a> */}
+                            <Link to="/signup">Create a new account</Link>
                         </form>
                     </div>
                 )}

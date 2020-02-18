@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800&display=swap');
+
+:root {
+	--primary: #333;
+	--secondary: #333;
+	--white: #fff;
+	--gray: #9b9b9b;
+}
+
+.InputBox {
+    margin: 1rem;
+}
+
+.InputBox+.InputBox {
+    margin-bottom: 3rem;
+}
+
+.formGroup {
+    position: relative;
+    padding: 15px 0 0;
+    /* width: 50%; */
+}
+
+.formField {
+    font-family: "Montserrat";
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--gray);
+    outline: 0;
+    font-size: 1rem;
+    color: var(--primary);
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.formField::placeholder {
+    color: transparent;
+}
+
+
+.formField:placeholder-shown ~ .formLabel {
+    font-family: "Montserrat";
+    font-size: 1rem;
+    cursor: text;
+    top: 20px;
+}
+
+.formLabel {
+    font-weight: 600;
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--gray);
+}
+
+.formField:focus {
+    padding-bottom: 6px;
+    border-width: 2px;
+    border-image: linear-gradient(to right, var(--primary), var(--secondary));
+    border-image-slice: 1;
+    font-weight: 600;
+}
+
+.formField:focus ~ .formLabel{
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.formField:required{
+    box-shadow: none;
+}
+
+.formField:invalid{
+    box-shadow: none;
+}

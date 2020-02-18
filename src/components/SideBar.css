@@ -3,13 +3,11 @@
 .sideBar {
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
-    width: 300px;
     background-color: white;
     transition: flex-basis 0.5s ease-in-out;
     color: white;
     overflow-y: auto;
     overflow-x: hidden;
-    flex-basis: 300px;
     font-family: "Montserrat", sans-serif;
     display: flex;
     flex-direction: column;
@@ -19,9 +17,7 @@
 }
 
 .shown {
-    transition: flex-basis 0.5s ease-in-out;
     flex-basis: 300px;
-    
 }
 
 .hidden {

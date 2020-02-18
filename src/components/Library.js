@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './Library.css';
 import { DocumentContextConsumer, updateDocumentID, updateText } from './Context/DocumentContext'
+import { UserContextConsumer } from './Context/UserContext'
 
 let selectFile;
 
@@ -56,15 +57,19 @@ class Library extends Component {
         return(
             <DocumentContextConsumer>
                 { DocumentContext => (
-                    <div id="library" className="library" onKeyDown={e => this.keyHandler(e, DocumentContext.deleteDocument)}>
-                        <div><button className='btn' id='signout' onClick={DocumentContext.logout}><FontAwesomeIcon icon={faSignOutAlt} /></button></div>
-                    <input type="search" className="Search"></input>
-                    <button className='btn' onClick={() => { DocumentContext.addDocument(); }} ><FontAwesomeIcon icon={ faPlus } size="lg" /></button>
-                    <button className='btn' onClick={() => { DocumentContext.deleteDocument(); }} ><FontAwesomeIcon icon={ faTrash } size="lg" /></button>
-                    <ul>
-                    {files}
-                    </ul>
-                </div>
+                    <UserContextConsumer>
+                        { UserContext => (
+                            <div id="library" className="library" onKeyDown={e => this.keyHandler(e, DocumentContext.deleteDocument)}>
+                            <div><button className='btn' id='signout' onClick={UserContext.logout}><FontAwesomeIcon icon={faSignOutAlt} /></button></div>
+                            <input type="search" className="Search"></input>
+                            <button className='btn' onClick={() => { DocumentContext.addDocument(); }} ><FontAwesomeIcon icon={ faPlus } size="lg" /></button>
+                            <button className='btn' onClick={() => { DocumentContext.deleteDocument(); }} ><FontAwesomeIcon icon={ faTrash } size="lg" /></button>
+                            <ul>
+                            {files}
+                            </ul>
+                            </div>
+                        )}
+                </UserContextConsumer>
                 )}
             </DocumentContextConsumer>   
         )

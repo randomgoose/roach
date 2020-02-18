@@ -4,6 +4,7 @@ import { updateDocumentID } from './DocumentContext';
 const { Provider, Consumer } = new React.createContext();
 const axios = require('axios');
 let auth;
+let login;
 let updateDocuments;
 
 class UserContextProvider extends React.Component {
@@ -118,6 +119,7 @@ class UserContextProvider extends React.Component {
         const context = this.state;
         auth = this.auth;
         updateDocuments = this.updateDocuments;
+        login = this.login;
         return (
             <Provider value={{ isLoggedIn: context.isLoggedIn,
                                id: context.id,
@@ -132,4 +134,4 @@ class UserContextProvider extends React.Component {
     }
 }
 
-export { UserContextProvider, Consumer as UserContextConsumer, auth, updateDocuments }
+export { UserContextProvider, Consumer as UserContextConsumer, auth, updateDocuments, login }

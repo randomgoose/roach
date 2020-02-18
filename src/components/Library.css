@@ -1,4 +1,8 @@
 
+.library {
+    width: 100%;
+}
+
 li.unselected {
     width: 100%;
     height: 100px;
@@ -10,7 +14,7 @@ li.unselected {
 
 .library li {
     border-bottom: 1px solid #eee;
-    color: #fff;
+    color: #333;
 }
 
 .library ul {
@@ -18,6 +22,7 @@ li.unselected {
 }
 
 .library a {
+    color: #333;
     height: 100px;
     width: 100%;
     text-decoration: none;
@@ -27,6 +32,7 @@ li.unselected {
 }
 
 li.selected{
+    color: #333;
     width: 100%;
     height: 100px;
     background-color: #fff;

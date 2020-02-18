@@ -14,8 +14,8 @@ class File extends Component {
                             DocumentContext.updateDocumentID(this.props.id);
                             this.props.selectFile(this.props.index, this.props.id, this.props.content);
                         }}>
-                            <div className="timeCreated">{this.props.timeCreated}</div>
-                            <div className="fileExcerpt">{this.props.content.length > 75 ? this.props.content.substring(0, 75) + '...' : this.props.content}</div>
+                            <div className="timeCreated">{this.props.timeCreated.split("T")[0] + " " + this.props.timeCreated.split("T")[1].split(".")[0]}</div>
+                            <div className="fileExcerpt">{this.props.content.length > 25 ? this.props.content.substring(0, 25) + '...' : this.props.content}</div>
                             
                             {/* <div className="fileID">{this.props.title}</div> */}
                             {/* <div className="fileID">{this.props.id}</div> */}

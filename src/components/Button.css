@@ -1,0 +1,28 @@
+.Button {
+    font-family: "Montserrat", sans-serif;
+    display: block;
+    width: 200px;
+    height: 36px;
+    font-size: 12px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
+    transition: 0.4s;
+    border-radius: 2px;
+    margin: 1rem 1rem 1rem 1rem;
+}
+
+.Primary {
+    background-color: #333;
+    color: #fff;
+}
+
+.Secondary {
+    border: 2px solid #333;
+    background-color: #fff;
+    color: #333;
+}
+
+.Button:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}

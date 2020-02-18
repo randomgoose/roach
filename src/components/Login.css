@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800&display=swap');
 
 .Login {
-    /* background-color: green; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /* justify-self: center; */
     height: 600px;
     position: relative;
     top: 300px;
@@ -18,110 +16,27 @@
     align-items: center;
 }
 
-:root {
-	--primary: #11998e;
-	--secondary: #38ef7d;
-	--white: #fff;
-	--gray: #9b9b9b;
-}
-
-.formGroup {
-    position: relative;
-    padding: 15px 0 0;
-    /* width: 50%; */
-}
-
-.formField {
-    font-family: inherit;
-    width: 100%;
-    border: 0;
-    border-bottom: 1px solid var(--gray);
-    outline: 0;
-    font-size: 1rem;
-    color: var(--white);
-    padding: 7px 0;
-    background: transparent;
-    transition: border-color 0.2s;
-}
-
-.formField::placeholder {
-    color: transparent;
-}
-
-
-.formField:placeholder-shown ~ .formLabel {
-    font-size:  1rem;
-    cursor: text;
-    top: 20px;
-}
-
-.formLabel {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: var(--gray);
-}
-
-.formField:focus {
-    padding-bottom: 6px;
-    font-weight: 700;
-    border-width: 3px;
-    border-image: linear-gradient(to right, var(--primary), var(--secondary));
-    border-image-slice: 1;
-}
-
-.formField:focus ~ .formLabel{
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: var(--primary);
-    font-weight: 700;
-}
-
-.formField:required{
-    box-shadow: none;
-}
-
-.formField:invalid{
-    box-shadow: none;
-}
-
-.mainButton {
-    font-family: "Montserrat", sans-serif;
-    width: 200px;
-    height: 36px;
-    font-size: 16px;
-    color: white;
-    font-weight: bold;
-    background-color: #000;
-    border: none;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.5s;
-    letter-spacing: 2px;
-}
-
-.mainButton:hover{
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
-}
-
 .Header {
     position: relative;
     font-family: "Montserrat", sans-serif;
     color: #333;
     font-weight: bold;
     font-size: 24px;
+    text-align: left;
+    margin: 1rem;
 }
 
 .Text {
-    width: 90%;
+    /* width: 90%; */
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 0.8rem;
     color: #999;
     font-family: "Montserrat", sans-serif;
+    text-align: left;
+}
+
+.Text.Center {
+    text-align: center;
 }
 
 a {

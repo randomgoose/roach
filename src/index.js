@@ -5,13 +5,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { UserContextProvider } from './components/Context/UserContext';
 import { DocumentContextProvider } from './components/Context/DocumentContext';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
-    <UserContextProvider>
-        <DocumentContextProvider>
-            <App />
-        </DocumentContextProvider>
-    </UserContextProvider>,
+    <Router>
+        <UserContextProvider>
+            <DocumentContextProvider>
+                <App />
+            </DocumentContextProvider>
+        </UserContextProvider>
+    </Router>,
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

@@ -9,7 +9,7 @@
 }
 
 .timeCreated{
-    color: #999;
+    color: #666;
     /* background-color: blue; */
     font-size: 0.9em;
 
@@ -17,6 +17,9 @@
 
 .fileExcerpt {
     /* background: red; */
-    color: white;
+    color: #333;
+    font-weight: 600;
 
+word-wrap:break-word; 
+word-break:break-all; 
 }

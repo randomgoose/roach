@@ -4,6 +4,8 @@ import ToolBar from './components/ToolBar';
 import SideBar from './components/SideBar';
 import WordCounter from './components/WordCounter';
 import Preview from './components/Preview';
+import Signup from './components/Signup'
+import { Route, Switch, Link } from 'react-router-dom';
 // import { jsPDF } from 'jspdf';
 import './App.css';
 import './style.css'
@@ -53,32 +55,42 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div className='container'>
-				<ToolBar changeTheme={this.changeTheme}
-					exportPDF={this.exportPDF}
-					updateText={this.updateText}
-					toggleSideBar={this.toggleSideBar}
-					collapsed={this.state.sideBarCollapsed} />
-				<UserContextConsumer>
-					{ UserContext => (
-						<SideBar isLoggedIn={UserContext.isLoggedIn} collapsed={this.state.sideBarCollapsed} updateText={this.updateText} />
-					)}
-				</UserContextConsumer>
-				<DocumentContextConsumer>
-					{ DocumentContext => (
-						<React.Fragment>
-							<Editor undo={DocumentContext.undo}
-									redo={DocumentContext.redo}
-									saveDocument={DocumentContext.saveDocument}
-									setStyle={DocumentContext.setStyle}
-									updateText={DocumentContext.updateText}
-									rawText={DocumentContext.rawText}/>
-							<Preview textToRender={DocumentContext.rawText.present}/>
-							<WordCounter wordsNum={DocumentContext.wordsNum} linesNum={DocumentContext.linesNum} />
-						</React.Fragment>
-					) }
-				</DocumentContextConsumer>
-			</div>
+
+			<Switch>
+				<Route exact path="/">
+					<div className='container'>
+					<ToolBar changeTheme={this.changeTheme}
+						exportPDF={this.exportPDF}
+						updateText={this.updateText}
+						toggleSideBar={this.toggleSideBar}
+						collapsed={this.state.sideBarCollapsed} />
+					<UserContextConsumer>
+						{ UserContext => (
+							<SideBar isLoggedIn={UserContext.isLoggedIn} collapsed={this.state.sideBarCollapsed} updateText={this.updateText} />
+						)}
+					</UserContextConsumer>
+					<DocumentContextConsumer>
+						{ DocumentContext => (
+							<React.Fragment>
+								<WordCounter wordsNum={DocumentContext.wordsNum} linesNum={DocumentContext.linesNum} />
+								<Editor undo={DocumentContext.undo}
+										redo={DocumentContext.redo}
+										saveDocument={DocumentContext.saveDocument}
+										setStyle={DocumentContext.setStyle}
+										updateText={DocumentContext.updateText}
+										rawText={DocumentContext.rawText}/>
+								<Preview textToRender={DocumentContext.rawText.present}/>
+							</React.Fragment>
+						) }
+					</DocumentContextConsumer>
+					</div>
+				</Route>
+
+				<Route exact path="/signup">
+					<Signup />
+				</Route>
+			</Switch>
+			
 		)
 	}
 }
